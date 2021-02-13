@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,10 @@
 		4E2AB76025D7F6FA00A2765A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2AB75F25D7F6FA00A2765A /* SearchViewModel.swift */; };
 		4E2AB78825D8007000A2765A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2AB78725D8007000A2765A /* SearchView.swift */; };
 		4E2AB78D25D800A700A2765A /* CShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2AB78C25D800A700A2765A /* CShape.swift */; };
+		4EEFE5E325D80F9D00D880B9 /* PodcastDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEFE5E225D80F9D00D880B9 /* PodcastDetail.swift */; };
+		4EEFE5E725D80FBA00D880B9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEFE5E625D80FBA00D880B9 /* DetailViewModel.swift */; };
+		4EEFE5EA25D8155000D880B9 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEFE5E925D8155000D880B9 /* RSSFeed.swift */; };
+		4EEFE5EF25D816D000D880B9 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEFE5EE25D816D000D880B9 /* AlbumView.swift */; };
 		D32AD416A3DE6E9DDA802728 /* Pods_podCAST.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF32FCB8283E72D961113AEA /* Pods_podCAST.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +41,10 @@
 		4E2AB75F25D7F6FA00A2765A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		4E2AB78725D8007000A2765A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		4E2AB78C25D800A700A2765A /* CShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CShape.swift; sourceTree = "<group>"; };
+		4EEFE5E225D80F9D00D880B9 /* PodcastDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetail.swift; sourceTree = "<group>"; };
+		4EEFE5E625D80FBA00D880B9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		4EEFE5E925D8155000D880B9 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
+		4EEFE5EE25D816D000D880B9 /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		71DB73B51E9C3984E4561AA8 /* Pods-podCAST.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-podCAST.debug.xcconfig"; path = "Target Support Files/Pods-podCAST/Pods-podCAST.debug.xcconfig"; sourceTree = "<group>"; };
 		775DEA28913C6DECF17AC0A2 /* Pods-podCAST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-podCAST.release.xcconfig"; path = "Target Support Files/Pods-podCAST/Pods-podCAST.release.xcconfig"; sourceTree = "<group>"; };
 		BF32FCB8283E72D961113AEA /* Pods_podCAST.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_podCAST.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,7 +76,6 @@
 				71DB73B51E9C3984E4561AA8 /* Pods-podCAST.debug.xcconfig */,
 				775DEA28913C6DECF17AC0A2 /* Pods-podCAST.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -119,7 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				4E2AB73425D7F30A00A2765A /* ContentView.swift */,
-				4E2AB74625D7F34E00A2765A /* Home.swift */,
+				4EEFE5E125D80F8A00D880B9 /* search */,
 			);
 			path = SCENES;
 			sourceTree = "<group>";
@@ -127,6 +134,7 @@
 		4E2AB74325D7F33D00A2765A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				4EEFE5ED25D816C800D880B9 /* detail */,
 				4E2AB78B25D8009F00A2765A /* custom */,
 				4E2AB78625D7FFA100A2765A /* search */,
 			);
@@ -146,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				4E2AB75F25D7F6FA00A2765A /* SearchViewModel.swift */,
+				4EEFE5E625D80FBA00D880B9 /* DetailViewModel.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -154,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				4E2AB74C25D7F39200A2765A /* hideKeyboard.swift */,
+				4EEFE5E925D8155000D880B9 /* RSSFeed.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -180,6 +190,23 @@
 				4E2AB78C25D800A700A2765A /* CShape.swift */,
 			);
 			path = custom;
+			sourceTree = "<group>";
+		};
+		4EEFE5E125D80F8A00D880B9 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				4E2AB74625D7F34E00A2765A /* Home.swift */,
+				4EEFE5E225D80F9D00D880B9 /* PodcastDetail.swift */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		4EEFE5ED25D816C800D880B9 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				4EEFE5EE25D816D000D880B9 /* AlbumView.swift */,
+			);
+			path = detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,13 +322,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EEFE5EA25D8155000D880B9 /* RSSFeed.swift in Sources */,
 				4E2AB75825D7F64E00A2765A /* PodcastModel.swift in Sources */,
 				4E2AB78825D8007000A2765A /* SearchView.swift in Sources */,
 				4E2AB75C25D7F66C00A2765A /* SingeltonAPI.swift in Sources */,
 				4E2AB76025D7F6FA00A2765A /* SearchViewModel.swift in Sources */,
 				4E2AB75725D7F64E00A2765A /* EpoisdesModel.swift in Sources */,
 				4E2AB74D25D7F39200A2765A /* hideKeyboard.swift in Sources */,
+				4EEFE5E325D80F9D00D880B9 /* PodcastDetail.swift in Sources */,
+				4EEFE5E725D80FBA00D880B9 /* DetailViewModel.swift in Sources */,
 				4E2AB73525D7F30A00A2765A /* ContentView.swift in Sources */,
+				4EEFE5EF25D816D000D880B9 /* AlbumView.swift in Sources */,
 				4E2AB78D25D800A700A2765A /* CShape.swift in Sources */,
 				4E2AB74725D7F34E00A2765A /* Home.swift in Sources */,
 				4E2AB73325D7F30A00A2765A /* podCASTApp.swift in Sources */,

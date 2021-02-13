@@ -144,8 +144,9 @@ struct Home: View {
                     // assigning name as ID...
                     
                     ForEach(vm.poadcastArray,id: \.feedUrl){gradient in
-                        
+                        NavigationLink(destination: PodcastDetail(podcast:gradient)) {
                         SearchView(columns: $columns, gradient: gradient, vm: vm)
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -158,6 +159,8 @@ struct Home: View {
         
             Spacer()
     }
+        .navigationBarHidden(true)
+        .navigationBarTitle("")
         .edgesIgnoringSafeArea(.all)
     }
 }

@@ -12,7 +12,7 @@ class SearchViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var txt = ""
     @Published     var poadcastArray = [PodcastModel]()
-@Published var notFoundData = true
+    @Published var notFoundData = true
     
     
     func makeSearchOperation ()  {
@@ -54,5 +54,5 @@ class SearchViewModel: ObservableObject {
         }
     }
     
-
+    
 }

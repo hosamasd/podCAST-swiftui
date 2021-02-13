@@ -13,6 +13,12 @@ extension View {
     }
 }
 
+extension String {
+    func toSecrueHttps() -> String {
+        return self.contains("https") ? self : self.replacingOccurrences(of: "http", with: "https")
+    }
+}
+
 
 //hide keyboard when tap around
 

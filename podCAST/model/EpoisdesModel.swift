@@ -7,9 +7,10 @@
 //
 
 import UIKit
-//import FeedKit
+import FeedKit
 
-struct EpoisdesModel: Codable {
+struct EpoisdesModel: Codable,Identifiable {
+    var id = UUID().uuidString
     
     let title:String
     let pubDate:Date
@@ -20,13 +21,15 @@ struct EpoisdesModel: Codable {
     var fileUrl:String? 
     
     
-//    init(feed:RSSFeedItem) {
-//        self.streamUrl = feed.enclosure?.attributes?.url ?? ""
-//        self.title = feed.title ?? ""
-//        self.pubDate = feed.pubDate ?? Date()
-//        self.description = feed.iTunes?.iTunesSubtitle ?? feed.description ?? ""
-//        self.imageUrl = feed.iTunes?.iTunesImage?.attributes?.href
-//        self.author = feed.author ?? ""
-//    }
+    init(feed:RSSFeedItem) {
+        self.streamUrl = feed.enclosure?.attributes?.url ?? ""
+        self.title = feed.title ?? ""
+        self.pubDate = feed.pubDate ?? Date()
+        self.description = feed.iTunes?.iTunesSubtitle ?? feed.description ?? ""
+        self.imageUrl = feed.iTunes?.iTunesImage?.attributes?.href
+        self.author = feed.author ?? ""
+        self.id  = UUID().uuidString
+        
+    }
 }
 

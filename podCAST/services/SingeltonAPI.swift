@@ -8,7 +8,7 @@
 
 import UIKit
 //import Alamofire
-//import FeedKit
+import FeedKit
 
 extension Notification.Name {
     static let downloadProgress = Notification.Name("downloadProgress")
@@ -51,23 +51,28 @@ class APIServices {
 //        }
     }
     
-    func fetchEpoisdes(feedUrl:String,completion:  @escaping ([EpoisdesModel])->())  {
+    func fetchEpoisdes(feedUrl:String,completion:  @escaping ([EpoisdesModel]?,Error?)->())  {
         
          guard let feedUrl =  URL(string: feedUrl) else { return  }
         //put it in background thread
-//        DispatchQueue.global(qos: .background).async {
-//            let parser = FeedParser(URL: feedUrl)
-//            parser.parseAsync { (result) in
-//
-//                if let err = result.error {
-//                    print("an error happened ",err.localizedDescription)
-//                    return
-//                }
-//                guard let feed = result.rssFeed else {return}
-//                let epoisdes = feed.toEpoisdes()
-//                completion(epoisdes)
-//            }
-//        }
+        DispatchQueue.global(qos: .background).async {
+            let parser = FeedParser(URL: feedUrl)
+            parser.parseAsync { (result) in
+
+                switch result {
+                case   .failure(let err):
+                print("an error happened ",err.localizedDescription)
+                completion(nil,err)
+                   
+                case .success(let feeds):
+                   
+                    
+                    guard let feed = feeds.rssFeed else {return}
+                    let epoisdes = feed.toEpoisdes()
+                    completion(epoisdes,nil)
+                }
+            }
+        }
     }
     
     func getPodcast(text:String,completion: @escaping (Result?,Error?)->())   {

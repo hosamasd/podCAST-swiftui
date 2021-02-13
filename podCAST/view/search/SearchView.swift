@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct SearchView: View {
     
@@ -20,7 +21,8 @@ struct SearchView: View {
                 
             ZStack{
                 
-                Image(systemName: "person")
+                WebImage(url: URL(string: gradient.artworkUrl600?.toSecrueHttps() ?? ""))
+
                     .resizable()
 //                    .aspectRatio(contentMode: .fit)
                     .frame(height: 100)
@@ -41,7 +43,9 @@ struct SearchView: View {
 
                 HStack(spacing: 15){
 
-                    Image(systemName: "person")
+                    WebImage(url: URL(string: gradient.artworkUrl600?.toSecrueHttps() ?? ""))
+
+//                    Image(systemName: "person")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 80)
