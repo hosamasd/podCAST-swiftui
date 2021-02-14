@@ -16,7 +16,8 @@ struct PodcastDetail: View {
     @State var columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: 1)
     var top = UIApplication.shared.windows.first?.safeAreaInsets.top
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var vmm = MainViewModel()
+    @EnvironmentObject var vmm: MainViewModel
+//    @StateObject var vmm = MainViewModel()
     @GestureState var gestureOffset:CGFloat = 0 //avoid glitches
     @Namespace var animation
 
@@ -120,6 +121,9 @@ struct PodcastDetail: View {
                                     Button(action: {
                                         self.vmm.selectedPodacst = gradient
                                         self.vmm.show.toggle()
+                                        self.vmm.showTextDownload = true
+                                        self.vmm.download(eposide: gradient)
+                                        
                                     }, label: {
                                         Text("Play")
                                             .foregroundColor(.green)

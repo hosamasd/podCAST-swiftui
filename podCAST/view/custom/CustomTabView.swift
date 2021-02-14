@@ -13,7 +13,7 @@ struct CustomTabView: View {
     var sss = ["viewfinder","book.circle.fill","square.and.arrow.down.on.square.fill"]
   
     
-    
+    @EnvironmentObject var vm:MainViewModel
     @Binding var selected : String
 
     var body: some View {
@@ -24,14 +24,54 @@ struct CustomTabView: View {
                 
                 VStack(spacing: 10){
                     
+//                    if self.selected == "Favorite" {
+//
+//                    Text(vm.showText ?  "New" : "")
+//                        .foregroundColor(.green)
+//                        .frame(width: 55, height: 5)
+//                    }
+//                    else if
+                    
                     Capsule()
                         .fill(Color.clear)
                         .frame(height: 5)
                         .overlay(
-                    
-                            Capsule()
-                                .fill(self.selected == i ? Color("Color") : Color.clear)
-                                .frame(width: 55, height: 5)
+
+
+//                            if self.selected == "Favorite" {
+                            
+//                            ZStack{
+                            
+                                Capsule()
+                                    .fill(self.selected == i ? Color("Color") : Color.clear)
+                                    .frame(width: 55, height: 5)
+                                
+//                                if vm.showText || vm.showTextDownload{
+//                                if self.selected == "Favorite" {
+//
+//                                Text(vm.showText ?  "New" : "asss")
+//                                    .foregroundColor(.green)
+//                                    .frame(width: 55, height: 5)
+//                                }
+//                                else if self.selected == "Download"  {
+//                                    Text(vm.showTextDownload ?  "New" : "sasas")
+//                                        .foregroundColor(.green)
+//                                }
+//                                }
+//                                else {
+//                                    Text("")
+//                                        .foregroundColor(.green)
+//                                }
+                                
+                           
+                                
+//                            Capsule()
+//                                .fill(self.selected == i ? Color("Color") : Color.clear)
+//                                .frame(width: 55, height: 5)
+
+
+//                            }
+//                            .frame(width: 55, height: 5)
                          )
                     
                     Button(action: {
@@ -43,7 +83,6 @@ struct CustomTabView: View {
                         VStack{
                             
                             Image(systemName:sss[getName(x:i)])
-//                            Image(i)
                                 .renderingMode(.original)
                             Text(i)
                                 .foregroundColor(.black)
@@ -54,6 +93,7 @@ struct CustomTabView: View {
             
         }
         .padding(.horizontal)
+//        .environmentObject(vm)
     }
     
     func getName(x:String) -> Int {

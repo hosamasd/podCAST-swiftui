@@ -117,6 +117,7 @@ struct SecondPodcastDetail: View {
                                     Button(action: {
                                         self.vmm.selectedPodacst = gradient
                                         self.vmm.show.toggle()
+                                        self.vmm.showTextDownload = true
                                     }, label: {
                                         Text("Play")
                                             .foregroundColor(.green)
@@ -126,7 +127,6 @@ struct SecondPodcastDetail: View {
                                 }
                             })
                             .contentShape(RoundedRectangle(cornerRadius: 5))
-//                        SearchView(columns: $columns, gradient: gradient, vm: vm)
                     }
                 }
                     // setting default frame height...

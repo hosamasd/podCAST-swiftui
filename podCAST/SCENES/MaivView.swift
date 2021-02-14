@@ -32,11 +32,7 @@ struct MaivView: View {
                         Home()
                     }
                     else{
-                        VStack {
-                            Spacer()
-                            Text("dfdsfdsf")
-                            Spacer()
-                        }
+                        DownloadHome()
                     }
                     
                     CustomTabView(selected: $selected)

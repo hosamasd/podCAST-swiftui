@@ -35,6 +35,7 @@ import SwiftUI
 extension UserDefaults {
     static let ketTrack = "ketTrack"
     static let downloadEpoisdeKey = "downloadEpoisdeKey"
+    
     func savePodcasts() -> [PodcastModel] {
         guard let keys = UserDefaults.standard.data(forKey: UserDefaults.ketTrack) else {return []}
         guard let podcasts = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(keys) as? [ PodcastModel] else {return []}
@@ -78,12 +79,19 @@ extension UserDefaults {
     
     func deleteEpoisde(epoi: EpoisdesModel)  {
         let epoisdes = downloadedEpoisde()
-        let filterEpoi = epoisdes.filter { (e) -> Bool in
-            return e.title != e.title && e.author != e.author
-        }
+//        let filterEpoi: () = epoisdes.removeAll { (e) -> Bool in
+//            e.title == epoi.title && e.description == epoi.description
+//        }
         
+        let filterEpoi = epoisdes.filter { (e) -> Bool in
+            return e.title != e.title && e.description != e.description
+        }
+        print(epoisdes)
         let data = NSKeyedArchiver.archivedData(withRootObject: filterEpoi)
         UserDefaults.standard.set(data, forKey: UserDefaults.downloadEpoisdeKey)
+        
+//        var dowloadedEpoisdes = downloadedEpoisde()
+//        print(dowloadedEpoisdes)
         
     }
 }

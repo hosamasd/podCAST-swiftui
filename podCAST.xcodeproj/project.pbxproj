@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E1FE46A25D939F900480E49 /* DownloadHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FE46925D939F900480E49 /* DownloadHome.swift */; };
+		4E1FE46E25D93A5D00480E49 /* DownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FE46D25D93A5D00480E49 /* DownloadViewModel.swift */; };
+		4E1FE47625D93B2500480E49 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FE47525D93B2500480E49 /* DownloadView.swift */; };
 		4E2AB73325D7F30A00A2765A /* podCASTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2AB73225D7F30A00A2765A /* podCASTApp.swift */; };
 		4E2AB73525D7F30A00A2765A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2AB73425D7F30A00A2765A /* ContentView.swift */; };
 		4E2AB73725D7F30B00A2765A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E2AB73625D7F30B00A2765A /* Assets.xcassets */; };
@@ -39,6 +42,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E1FE46925D939F900480E49 /* DownloadHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadHome.swift; sourceTree = "<group>"; };
+		4E1FE46D25D93A5D00480E49 /* DownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewModel.swift; sourceTree = "<group>"; };
+		4E1FE47525D93B2500480E49 /* DownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		4E2AB72F25D7F30A00A2765A /* podCAST.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podCAST.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E2AB73225D7F30A00A2765A /* podCASTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = podCASTApp.swift; sourceTree = "<group>"; };
 		4E2AB73425D7F30A00A2765A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,6 +109,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4E1FE46825D939EA00480E49 /* download */ = {
+			isa = PBXGroup;
+			children = (
+				4E1FE46925D939F900480E49 /* DownloadHome.swift */,
+			);
+			path = download;
+			sourceTree = "<group>";
+		};
 		4E2AB72625D7F30A00A2765A = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +163,7 @@
 		4E2AB74225D7F33800A2765A /* SCENES */ = {
 			isa = PBXGroup;
 			children = (
+				4E1FE46825D939EA00480E49 /* download */,
 				4EFD7A3C25D8F7B0001C2F66 /* bookmark */,
 				4E2AB73425D7F30A00A2765A /* ContentView.swift */,
 				4E9A2BC125D8E12100CDA33B /* MaivView.swift */,
@@ -185,6 +200,7 @@
 				4E2AB75F25D7F6FA00A2765A /* SearchViewModel.swift */,
 				4EEFE5E625D80FBA00D880B9 /* DetailViewModel.swift */,
 				4EEFE5FC25D8218400D880B9 /* MainViewModel.swift */,
+				4E1FE46D25D93A5D00480E49 /* DownloadViewModel.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -228,6 +244,7 @@
 		4E64608825D9284A00AEB43D /* download */ = {
 			isa = PBXGroup;
 			children = (
+				4E1FE47525D93B2500480E49 /* DownloadView.swift */,
 			);
 			path = download;
 			sourceTree = "<group>";
@@ -392,6 +409,7 @@
 			files = (
 				4EEFE60025D823EC00D880B9 /* MiniPlayerView.swift in Sources */,
 				4EEFE5EA25D8155000D880B9 /* RSSFeed.swift in Sources */,
+				4E1FE46E25D93A5D00480E49 /* DownloadViewModel.swift in Sources */,
 				4E64609725D92B4900AEB43D /* PinnedBookmarkView.swift in Sources */,
 				4E2AB75825D7F64E00A2765A /* PodcastModel.swift in Sources */,
 				4E2AB78825D8007000A2765A /* SearchView.swift in Sources */,
@@ -400,7 +418,9 @@
 				4E9A2BC625D8E1BD00CDA33B /* CustomTabView.swift in Sources */,
 				4E2AB75725D7F64E00A2765A /* EpoisdesModel.swift in Sources */,
 				4E2AB74D25D7F39200A2765A /* hideKeyboard.swift in Sources */,
+				4E1FE47625D93B2500480E49 /* DownloadView.swift in Sources */,
 				4E9A2BCE25D8EB3000CDA33B /* Storages.swift in Sources */,
+				4E1FE46A25D939F900480E49 /* DownloadHome.swift in Sources */,
 				4EEFE5E325D80F9D00D880B9 /* PodcastDetail.swift in Sources */,
 				4E9A2BC225D8E12100CDA33B /* MaivView.swift in Sources */,
 				4E9A2BCA25D8E53B00CDA33B /* SecondMiniplayer.swift in Sources */,

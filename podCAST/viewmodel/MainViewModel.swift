@@ -22,6 +22,8 @@ class MainViewModel: ObservableObject {
     @Published var secondfavoritePodcasts:[SecondPodcastModel] = []
     @Published var pinnedViews:[SecondPodcastModel] = []
 
+    @Published var showText = false
+    @Published var showTextDownload = false
     
     @Published var notFoundData=false
     
@@ -77,5 +79,9 @@ class MainViewModel: ObservableObject {
             
             self.notFoundData=false
         }
+    }
+    
+    func download(eposide:EpoisdesModel)  {
+        UserDefaults.standard.downloadEpoisde(epoisde: eposide)
     }
 }

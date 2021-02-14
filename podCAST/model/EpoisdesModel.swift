@@ -9,6 +9,21 @@
 import UIKit
 import FeedKit
 
+struct SecondEpoisdesModel:Identifiable{
+    
+    var id = UUID().uuidString
+    
+    let title:String
+    let pubDate:Date
+    let description:String
+    var imageUrl:String?
+    let author :String
+    let streamUrl:String
+    var fileUrl:String?
+    var offset:CGFloat = 0
+    
+}
+
 struct EpoisdesModel: Codable,Identifiable {
     internal init(id: String = UUID().uuidString, title: String, pubDate: Date, description: String, imageUrl: String? = nil, author: String, streamUrl: String, fileUrl: String? = nil) {
         self.id = id
