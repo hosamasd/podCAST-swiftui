@@ -63,54 +63,11 @@ struct BookmarkHome: View {
                         LazyVGrid(columns: columns,spacing: 20){
                             
                             ForEach(vmm.pinnedViews,id:\.feedUrl){pinned in
+                                let v = PodcastModel(artistName: pinned.artistName, trackName: pinned.trackName, artworkUrl600: pinned.artworkUrl600, trackCount: pinned.trackCount, feedUrl: pinned.feedUrl)
                                 
+                                NavigationLink(destination: PodcastDetail(podcast:v)) {
                                 PinnedBookmarkView(vmm:vmm,pinned:pinned,name:name)
-                                
-                                //                        TopView(pinned:pinned,pinnedViews:$pinnedViews,messages:$messages)
-                                
-                                
-//                                WebImage(url: URL(string: pinned.artworkUrl600 ?? "")!)
-//                                    .resizable()
-//                                    .aspectRatio(contentMode: .fill)
-//                                    //padding 30 + spacing 20 = 70
-//                                    .frame(width: (UIScreen.main.bounds.width - 70) / 3, height: (UIScreen.main.bounds.width - 70) / 3)
-//                                    .clipShape(Circle())
-//                                    // context menu for restoring...
-//                                    // context menushape...
-//                                    .contentShape(Circle())
-//                                    .contextMenu{
-//
-//                                        Button(action: {
-//
-//                                            // removing View...
-//
-//                                            withAnimation(.default){
-//
-//                                                var index = 0
-//
-//                                                for i in 0..<vmm.pinnedViews.count{
-//
-//                                                    if pinned.feedUrl == vmm.pinnedViews[i].feedUrl{
-//
-//                                                        index = i
-//                                                    }
-//                                                }
-//
-//                                                // removing pin view...
-//
-//                                                vmm.pinnedViews.remove(at: index)
-//
-//                                                // adding view to main View....
-//
-//                                                vmm.secondfavoritePodcasts.append(pinned)
-//                                            }
-//
-//                                        }) {
-//
-//                                            Text("Remove")
-//                                        }
-//                                    }
-//                                    .matchedGeometryEffect(id: pinned.feedUrl, in: name)
+                                }
                             }
                         }
                         .padding()
@@ -119,136 +76,11 @@ struct BookmarkHome: View {
                     LazyVStack(alignment: .leading, spacing: 0, content: {
                         
                         ForEach(vmm.secondfavoritePodcasts,id:\.feedUrl) { msg in
+                            let v = PodcastModel(artistName: msg.artistName, trackName: msg.trackName, artworkUrl600: msg.artworkUrl600, trackCount: msg.trackCount, feedUrl: msg.feedUrl)
                             
+                            NavigationLink(destination: PodcastDetail(podcast:v)) {
                             BookmarkView(vmm:vmm,msg:msg,name:name)
-//                            ZStack {
-//                                //
-//                                //                                // adding Buttons...
-//                                //
-//                                HStack{
-//
-//                                    Color.yellow
-//                                        .frame(width: 90)
-//                                        // hiding when left swipe...
-//                                        .opacity(msg.offset > 0 ? 1 : 0)
-//
-//                                    Spacer()
-//
-//                                    Color.red
-//                                        .frame(width: 90)
-//                                        .opacity(msg.offset < 0 ? 1 : 0)
-//                                }
-//                                //
-//                                HStack{
-//                                    //
-//                                    Button(action: {
-//
-//                                        // appending View....
-//                                        withAnimation(.default){
-//
-//
-//                                            let index = getIndex(profile: msg.feedUrl ?? "")
-//
-//                                            var pinnedView = vmm.secondfavoritePodcasts[index]
-//
-//                                            // setting offset to 0
-//
-//                                            pinnedView.offset = 0
-//
-//                                            vmm.pinnedViews.append(pinnedView)
-//
-//                                            // removing from main View...
-//
-//                                            vmm.secondfavoritePodcasts.removeAll { (msg1) -> Bool in
-//
-//                                                if msg.feedUrl == msg1.feedUrl{return true}
-//                                                else{return false}
-//                                            }
-//                                        }
-//
-//                                    }, label: {
-//
-//                                        Image(systemName: "pin.fill")
-//                                            .font(.title)
-//                                            .foregroundColor(.white)
-//                                    })
-//                                    .frame(width: 90)
-//                                    //
-//                                    //                                    // on ended not working...
-//                                    //
-//                                    Spacer()
-//
-//                                    Button(action: {
-//
-//                                        // removing from main View...
-//
-//                                        withAnimation(.default){
-//
-//                                            self.vmm.removeFavorites(msg: msg)
-//                                        }
-//
-//                                    }, label: {
-//
-//                                        Image(systemName: "trash.fill")
-//                                            .font(.title)
-//                                            .foregroundColor(.white)
-//                                    })
-//                                    .frame(width: 90)
-//                                }
-//                                //
-//                                HStack(spacing: 15){
-//
-//                                    WebImage(url: URL(string: msg.artworkUrl600 ?? "")!)
-//                                        .resizable()
-//                                        .aspectRatio(contentMode: .fill)
-//                                        .frame(width: 60, height: 60)
-//                                        .clipShape(Circle())
-//                                        .matchedGeometryEffect(id: msg.feedUrl, in: name)
-//
-//                                    VStack(alignment: .leading,spacing: 10){
-//
-//                                        Text(msg.artistName ?? "")
-//
-//                                        Text(msg.trackName ?? "")
-//                                            .foregroundColor(.gray)
-//                                            .lineLimit(1)
-//
-//                                        Divider()
-//                                    }
-//                                }
-//                                .padding(.all)
-//                                .background(Color.white)
-//                                .contentShape(Rectangle())
-//                                // adding gesture...
-//                                .offset(x: msg.offset)
-//                                .gesture(DragGesture().onChanged({ (value) in
-//                                    //
-//                                    withAnimation(.default){
-//
-//                                        vmm.secondfavoritePodcasts[getIndex(profile: msg.feedUrl ?? "")].offset = value.translation.width
-//                                    }
-//
-//                                })
-//                                .onEnded({ (value) in
-//
-//                                    withAnimation(.default){
-//
-//                                        if value.translation.width > 80{
-//
-//                                            vmm.secondfavoritePodcasts[getIndex(profile: msg.feedUrl ?? "")].offset = 90
-//                                        }
-//                                        else if value.translation.width < -80{
-//
-//                                            vmm.secondfavoritePodcasts[getIndex(profile: msg.feedUrl ?? "")].offset = -90
-//                                        }
-//                                        else{
-//
-//                                            vmm.secondfavoritePodcasts[getIndex(profile: msg.feedUrl ?? "")].offset = 0
-//                                        }
-//                                    }
-//                                }))
-//                                //
-//                            }
+                            }
                         }
                     })
                     .padding(.vertical)
