@@ -15,13 +15,31 @@ extension Notification.Name {
     static let downloadComplete = Notification.Name("downloadComplete")
 }
 
-class APIServices {
+extension NSNotification {
+    static let downloadProgress = NSNotification.Name.init("downloadProgress")
+    static let downloadComplete = NSNotification.Name.init("downloadComplete")
+
+}
+
+class APIServices:NSObject,URLSessionDownloadDelegate {
     
     typealias EposdeDownloadCompleteTuple = (title:String,filUrl:String)
     let baseUrlItunes = "https://itunes.apple.com/search"
     static let shared = APIServices()
+     var eposide = EpoisdesModel(title: "", pubDate: Date(), description: "", author: "", streamUrl: "")
     
     func downloadEpoisde(epoisde: EpoisdesModel)  {
+        eposide=epoisde
+        let urlString = epoisde.streamUrl
+        guard let url = URL(string: urlString) else { return  }
+        
+        
+        let configuration = URLSessionConfiguration.default
+        let operationQueue = OperationQueue()
+        let urlSession = URLSession(configuration: configuration, delegate: self, delegateQueue: operationQueue)
+        
+        let downloadTask = urlSession.downloadTask(with: url)
+        downloadTask.resume()
 //        let downloadRequest = DownloadRequest.suggestedDownloadDestination()
 //
 //        Alamofire.download(epoisde.streamUrl, to: downloadRequest).downloadProgress { (progress) in
@@ -143,4 +161,32 @@ class APIServices {
         }.resume()
     }
     
+}
+
+extension APIServices {
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let percentage = CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite)
+        
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .downloadProgress, object: nil, userInfo: ["title":self.eposide.title,"progress":"\(Int(percentage * 100))%"])
+        
+        
+//            self.percentageLabel.text = "\(Int(percentage * 100))%"
+//            self.shapeLayer.strokeEnd = percentage
+        }
+        
+        print(percentage)
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        print("Finished downloading file")
+         let fileUrl =  location.absoluteString
+
+        let epoisdeDownloadComplete = EposdeDownloadCompleteTuple(fileUrl,eposide.title)
+
+        DispatchQueue.main.async {
+        NotificationCenter.default.post(name: .downloadComplete, object: epoisdeDownloadComplete, userInfo: nil)
+        }
+    }
 }

@@ -119,18 +119,28 @@ struct PodcastDetail: View {
                             .contextMenu(menuItems: {
                                 VStack {
                                     Button(action: {
+//                                        self.vmm.selectedPodacst = gradient
+//                                        self.vmm.show.toggle()
+//                                        self.vmm.showTextDownload = true
+//                                        self.vmm.download(eposide: gradient)
+                                        
+                                    }, label: {
+                                        Text("Play")
+                                            .foregroundColor(.green)
+                                    })
+                                    
+                                    Button(action: {
                                         self.vmm.selectedPodacst = gradient
                                         self.vmm.show.toggle()
                                         self.vmm.showTextDownload = true
                                         self.vmm.download(eposide: gradient)
                                         
                                     }, label: {
-                                        Text("Play")
-                                            .foregroundColor(.green)
+                                        Text("Download")
+                                            .foregroundColor(.red)
                                     })
                                
-                                    Text("Download")
-                                        .foregroundColor(.red)
+                                   
                                 }
                             })
                             .contentShape(RoundedRectangle(cornerRadius: 5))

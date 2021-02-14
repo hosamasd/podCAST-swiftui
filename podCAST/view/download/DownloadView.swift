@@ -52,11 +52,21 @@ struct DownloadView: View {
             
             HStack(spacing: 15){
                 
+                ZStack(alignment: Alignment(horizontal: .center, vertical: .center), content: {
+                    
+               
                 WebImage(url: URL(string: msg.imageUrl?.toSecrueHttps() ?? "")!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 60, height: 60)
+                    .frame(width: 60)//, height: 60)
                     .clipShape(Circle())
+                    
+                    Text("\(msg.sssss)")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
+                
+                })
                 
                 VStack(alignment: .leading,spacing: 10){
                     

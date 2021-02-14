@@ -36,21 +36,39 @@ struct BookmarkHome: View {
             
             // Vstack Bug..
             
-            if vmm.notFoundData {
-                Text("No search artist done before!")
-                    .fontWeight(.semibold)
-                    .font(.system(size: 18))
-                    .padding(.top,55)
+            if vmm.secondfavoritePodcasts.isEmpty{
                 
-                Spacer()
-            } else  if vmm.secondfavoritePodcasts.isEmpty{
-                
-                // loading View...
-                ProgressView()
-                    .padding(.top,55)
-                
-                Spacer()
+                if vmm.notFoundData {
+                    Text("No Favorites yet!")
+                        .fontWeight(.semibold)
+                        .font(.system(size: 18))
+                        .padding(.top,55)
+                    
+                    Spacer()
+                }
+                else {
+                    // loading View...
+                    ProgressView()
+                        .padding(.top,55)
+                    
+                    Spacer()
+                }
             }
+//            if vmm.notFoundData {
+//                Text("No search artist done before!")
+//                    .fontWeight(.semibold)
+//                    .font(.system(size: 18))
+//                    .padding(.top,55)
+//
+//                Spacer()
+//            } else  if vmm.secondfavoritePodcasts.isEmpty{
+//
+//                // loading View...
+//                ProgressView()
+//                    .padding(.top,55)
+//
+//                Spacer()
+//            }
             
             else {
                 
@@ -75,7 +93,7 @@ struct BookmarkHome: View {
                     
                     LazyVStack(alignment: .leading, spacing: 0, content: {
                         
-                        ForEach(vmm.secondfavoritePodcasts,id:\.feedUrl) { msg in
+                        ForEach(vmm.secondfavoritePodcasts) { msg in
                             let v = PodcastModel(artistName: msg.artistName, trackName: msg.trackName, artworkUrl600: msg.artworkUrl600, trackCount: msg.trackCount, feedUrl: msg.feedUrl)
                             
                             NavigationLink(destination: PodcastDetail(podcast:v)) {

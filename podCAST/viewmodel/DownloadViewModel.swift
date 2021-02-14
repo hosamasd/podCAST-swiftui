@@ -12,7 +12,7 @@ class DownloadViewModel: ObservableObject {
     @Published var isFavorite = false
     @Published      var eposdeArray = [EpoisdesModel]()
     @Published      var secondEposdeArray = [SecondEpoisdesModel]()
-    
+    @Published var progressDownload:String = ""
     @Published var notFoundData = false
     
     
@@ -40,4 +40,32 @@ class DownloadViewModel: ObservableObject {
         
     }
     
+     func handleDownloadComplete(notify: Notification){
+    guard let object = notify.object as? APIServices.EposdeDownloadCompleteTuple else { return  }
+        
+        guard let index = self.eposdeArray.firstIndex(where: {$0.title == object.title}) else { return  }
+//        guard let index = self.eposdeArray.index(where: {
+//            $0.title == object.title
+//        })else {return}
+        self.eposdeArray[index].fileUrl = object.filUrl
+        self.secondEposdeArray[index].fileUrl = object.filUrl
+    }
+    
+     func handleDownloadProgress(userInfo: [String:Any]?){
+        guard let userInfo = userInfo as? [String:Any] else { return  }
+        guard let title = userInfo["title"] as? String else { return  }
+        guard let progress = userInfo["progress"] as? String else { return  }
+        
+//        guard let index = self.eposdeArray.firstIndex(where: {$0.title == title}) else { return  }
+//         let epo = self.eposdeArray.filter({$0.title==title})
+//        guard let ss = epo.first else {return}
+       
+
+        DispatchQueue.main.async {
+            if let index = self.secondEposdeArray.firstIndex(where: {$0.title == title}) {
+                self.secondEposdeArray[index].sssss = progress
+            }
+        }
+        
+     }
 }

@@ -61,7 +61,8 @@ class DetailViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self.titleNabv = podcast.artistName ?? "No Name"
                 self.eposdeArray = pods
-                self.notFoundData=false
+                self.notFoundData = self.eposdeArray.count <= 0 ? true : false
+
                 self.isLoading=true
             }
         }

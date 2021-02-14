@@ -13,7 +13,7 @@ struct SecondEpoisdesModel:Identifiable{
     
     var id = UUID().uuidString
     
-    let title:String
+    var title:String
     let pubDate:Date
     let description:String
     var imageUrl:String?
@@ -21,6 +21,8 @@ struct SecondEpoisdesModel:Identifiable{
     let streamUrl:String
     var fileUrl:String?
     var offset:CGFloat = 0
+    var sssss = ""
+    
     
 }
 

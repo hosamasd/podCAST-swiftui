@@ -9,7 +9,9 @@
 import UIKit
 
 
-struct SecondPodcastModel {
+struct SecondPodcastModel:Identifiable {
+    var id = UUID().uuidString
+    
     var artistName:String?
     var trackName:String?
     var artworkUrl600:String?

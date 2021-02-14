@@ -77,11 +77,12 @@ class MainViewModel: ObservableObject {
             }
             self.favoritePodcasts=ss
             
-            self.notFoundData=false
+            self.notFoundData=self.favoritePodcasts.count <= 0 ? true : false
         }
     }
     
     func download(eposide:EpoisdesModel)  {
         UserDefaults.standard.downloadEpoisde(epoisde: eposide)
+        APIServices.shared.downloadEpoisde(epoisde: eposide)
     }
 }

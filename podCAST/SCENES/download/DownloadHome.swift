@@ -91,6 +91,31 @@ struct DownloadHome: View {
         .onAppear {
             self.vm.getDownloads()
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.downloadProgress))
+               { obj in
+            
+                  // Change key as per your "userInfo"
+                   if let userInfo = obj.userInfo as? [String : Any] {
+//                     print(info)
+                    self.vm.handleDownloadProgress(userInfo: userInfo )
+                  }
+            
+        }
+        
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.downloadComplete))
+               { obj in
+                  // Change key as per your "userInfo"
+                   if let userInfo = obj.userInfo, let info = userInfo["info"] as? [String : Any] {
+                     print(info)
+                    self.vm.handleDownloadProgress(userInfo: info)
+                  }
+            
+        }
+        
+        
+//        .onReceive(NotificationCenter.default.addObserver, perform: { _ in
+//            /*@START_MENU_TOKEN@*//*@PLACEHOLDER=code@*/ /*@END_MENU_TOKEN@*/
+//        })
     }
 }
 

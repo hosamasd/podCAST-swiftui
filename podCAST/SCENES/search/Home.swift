@@ -15,7 +15,9 @@ struct Home: View {
     @State var show = false
     @State var columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: 3)
     @State var isTwo = false
-
+//    @EnvironmentObject var chain: ResponderChain
+    @State private var becomeFirstResponder = false
+    
     var body: some View {
         
         VStack{
@@ -24,6 +26,7 @@ struct Home: View {
             
             if show{
                 
+//                CustomTextField(becomeFirstResponder: $becomeFirstResponder,text: $vm.txt)
                 TextField("Search Podcasts", text: $vm.txt)
                     // search Bar Functionality...
                     
@@ -65,7 +68,7 @@ struct Home: View {
                 Button(action: {
                     
                     withAnimation(.easeOut){
-                        
+                        self.becomeFirstResponder.toggle()
                         show.toggle()
                     }
                     
