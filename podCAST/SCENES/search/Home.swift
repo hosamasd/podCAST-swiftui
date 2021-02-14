@@ -7,12 +7,13 @@
 
 import SwiftUI
 
+var top = UIApplication.shared.windows.first?.safeAreaInsets.top
+
 struct Home: View {
     
     @StateObject var vm = SearchViewModel()
     @State var show = false
     @State var columns = Array(repeating: GridItem(.flexible(), spacing: 20), count: 3)
-    var top = UIApplication.shared.windows.first?.safeAreaInsets.top
     @State var isTwo = false
 
     var body: some View {

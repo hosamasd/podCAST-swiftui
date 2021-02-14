@@ -77,10 +77,9 @@ class APIServices {
     
     func getPodcast(text:String,completion: @escaping (Result?,Error?)->())   {
         
-        let params = ["term":text,"media":"podcast"]
-        let urlString = baseUrlItunes + "?term=" + text + "&media=podcast"
+         let urlString = baseUrlItunes + "?term=" + text + "&media=podcast"
     
-         var originalString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? urlString
+        let originalString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? urlString
         
         APIServices.registerationGetMethodGenerics(urlString: originalString, completion: completion)
         

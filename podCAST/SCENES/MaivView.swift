@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MaivView: View {
-    @State var selected = "Search"
+    @State var selected = "Favorite"
     @Namespace var animation
     @State var expand = false
     @StateObject var vmm = MainViewModel()
@@ -22,16 +22,14 @@ struct MaivView: View {
                 
                 VStack{
                     
-                    if self.selected == "Search"{
+                   
+                     if self.selected == "Favorite"{
+                       BookmarkHome()
+                    }
+                    
+                     else  if self.selected == "Search"{
                         
                         Home()
-                    }
-                    else if self.selected == "Favorite"{
-                        VStack {
-                            Spacer()
-                            Text("dfdsfdsf")
-                            Spacer()
-                        }
                     }
                     else{
                         VStack {

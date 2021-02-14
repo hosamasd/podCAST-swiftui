@@ -8,6 +8,16 @@
 
 import UIKit
 
+
+struct SecondPodcastModel {
+    var artistName:String?
+    var trackName:String?
+    var artworkUrl600:String?
+    var trackCount:Int?
+    var feedUrl:String?
+    var offset: CGFloat
+}
+
 class PodcastModel:NSObject, Codable , NSCoding{
     internal init(artistName: String? = nil, trackName: String? = nil, artworkUrl600: String? = nil, trackCount: Int? = nil, feedUrl: String? = nil) {
         self.artistName = artistName
