@@ -1,5 +1,5 @@
 //
-//  PodcastDetail.swift
+//  SecondPodcastDetail.swift
 //  podCAST
 //
 //  Created by hosam on 2/13/21.
@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct PodcastDetail: View {
-    
-    var podcast:PodcastModel
+struct SecondPodcastDetail: View {
     
     @StateObject var vm = DetailViewModel()
     @State var show = false
@@ -51,14 +49,13 @@ struct PodcastDetail: View {
                 Button(action: {
                     
                     withAnimation(.easeOut){
-                        vmm.favoriteOrUnFavoritePodcast(pod: podcast)
                         print(123)
 //                        show.toggle()
                     }
                     
                 }) {
                     
-                    Image(systemName: !vmm.hasFavorite(pod: podcast) ? "bookmark" : "bookmark.fill" )
+                    Image(systemName: !vm.isFavorite ? "bookmark" : "bookmark.fill" )
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.black)
                 }
@@ -124,7 +121,6 @@ struct PodcastDetail: View {
                                         Text("Play")
                                             .foregroundColor(.green)
                                     })
-                               
                                     Text("Download")
                                         .foregroundColor(.red)
                                 }
@@ -149,15 +145,15 @@ struct PodcastDetail: View {
             Spacer()
         }
             //mini player for video
-//            if vmm.show{
-//                Miniplayer(animation: animation, podcast: podcast)
-//                .transition(.move(edge: .bottom))
-//                .offset(y:vmm.offset)
-//                .gesture(DragGesture().updating($gestureOffset, body: { (value, state, _) in
-//                    state=value.translation.height
-//                }).onEnded(onEnded))
-//
-//            }
+            if vmm.show{
+                Miniplayer(animation: animation, podcast: vmm.selectedPodacst)
+                .transition(.move(edge: .bottom))
+                .offset(y:vmm.offset)
+                .gesture(DragGesture().updating($gestureOffset, body: { (value, state, _) in
+                    state=value.translation.height
+                }).onEnded(onEnded))
+                
+            }
         })
         .onChange(of: gestureOffset, perform: { value in
             onChanged()
@@ -169,9 +165,9 @@ struct PodcastDetail: View {
         .edgesIgnoringSafeArea(.all)
         
         .onAppear(perform: {
-            self.vm.getAll(podcast: podcast)
+            self.vm.getAlls()
         })
-        .environmentObject(vmm)
+    
         
         }
     

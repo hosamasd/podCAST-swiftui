@@ -9,6 +9,14 @@
 import UIKit
 
 class PodcastModel:NSObject, Codable , NSCoding{
+    internal init(artistName: String? = nil, trackName: String? = nil, artworkUrl600: String? = nil, trackCount: Int? = nil, feedUrl: String? = nil) {
+        self.artistName = artistName
+        self.trackName = trackName
+        self.artworkUrl600 = artworkUrl600
+        self.trackCount = trackCount
+        self.feedUrl = feedUrl
+    }
+    
     
     func encode(with aCoder: NSCoder) {
         print("podcast to data")
@@ -26,6 +34,8 @@ class PodcastModel:NSObject, Codable , NSCoding{
         self.feedUrl = aDecoder.decodeObject(forKey: "feedUrl") as? String
         
     }
+    
+    
     
     
     var artistName:String?

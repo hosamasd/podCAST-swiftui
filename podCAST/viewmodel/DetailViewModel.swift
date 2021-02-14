@@ -16,15 +16,13 @@ class DetailViewModel: ObservableObject {
     @Published      var eposdeArray = [EpoisdesModel]()
     @Published var notFoundData = true
     
-   
-    
-    func getAll(podcast:PodcastModel)  {
+    func getAlls()  {
         // http://www.we-are-a.com/Site/A_Marbin/rss.xml
        
         notFoundData=false
         isLoading=true
         
-        APIServices.shared.fetchEpoisdes(feedUrl: podcast.feedUrl ?? "") { (pods,err) in
+        APIServices.shared.fetchEpoisdes(feedUrl:   "http://www.we-are-a.com/Site/A_Marbin/rss.xml".toSecrueHttps()) { (pods,err) in
             
             if let err=err {
                 DispatchQueue.main.async {
@@ -33,6 +31,32 @@ class DetailViewModel: ObservableObject {
                 }
             }
             
+            guard let pods=pods else {return}
+            DispatchQueue.main.async {
+//                self.titleNabv = podcast.artistName ?? "No Name"
+                self.eposdeArray = pods
+                self.notFoundData=false
+                self.isLoading=true
+            }
+        }
+    }
+    
+    
+    func getAll(podcast:PodcastModel)  {
+        // http://www.we-are-a.com/Site/A_Marbin/rss.xml
+
+        notFoundData=false
+        isLoading=true
+
+        APIServices.shared.fetchEpoisdes(feedUrl: podcast.feedUrl ?? "") { (pods,err) in
+
+            if let err=err {
+                DispatchQueue.main.async {
+                self.notFoundData=true
+                self.isLoading=false
+                }
+            }
+
             guard let pods=pods else {return}
             DispatchQueue.main.async {
                 self.titleNabv = podcast.artistName ?? "No Name"
