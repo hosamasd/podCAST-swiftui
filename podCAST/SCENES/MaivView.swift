@@ -11,8 +11,8 @@ struct MaivView: View {
     @State var selected = "Favorite"
     @Namespace var animation
     @State var expand = false
-    @StateObject var vmm = MainViewModel()
-    
+//    @StateObject var vmm = MainViewModel()
+    @EnvironmentObject var vmm : MainViewModel
     var body: some View {
         
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
@@ -45,8 +45,10 @@ struct MaivView: View {
             
             if vmm.show {
                 
-                
-                SecondMiniplayer(animation: animation, expand: $vmm.show)
+//                SecondMiniplayer()
+                SSSecondMiniplayer(animation: animation)
+//                SecondMiniplayer(animation: animation)
+                    .padding(.bottom,vmm.expand ? 0 : 20)
                 
             }
         })

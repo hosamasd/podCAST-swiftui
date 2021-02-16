@@ -40,14 +40,21 @@ struct EpoisdesModel: Codable,Identifiable {
     
     var id = UUID().uuidString
     
-    let title:String
-    let pubDate:Date
+//    let title:String
+//    let pubDate:Date
+//    let description:String
+//    var imageUrl:String?
+//    let author :String
+//    let streamUrl:String
+//    var fileUrl:String?
+    
+    var title:String
+    var pubDate:Date
     let description:String
     var imageUrl:String?
-    let author :String
-    let streamUrl:String
-    var fileUrl:String? 
-    
+    var author :String
+    var streamUrl:String
+    var fileUrl:String?
     
     init(feed:RSSFeedItem) {
         self.streamUrl = feed.enclosure?.attributes?.url ?? ""

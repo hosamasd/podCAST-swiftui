@@ -186,7 +186,7 @@ extension APIServices {
         let epoisdeDownloadComplete = EposdeDownloadCompleteTuple(fileUrl,eposide.title)
 
         DispatchQueue.main.async {
-        NotificationCenter.default.post(name: .downloadComplete, object: epoisdeDownloadComplete, userInfo: nil)
+            NotificationCenter.default.post(name: .downloadComplete, object: nil, userInfo: ["title":self.eposide.title,"fileUrl":fileUrl])
         }
     }
 }

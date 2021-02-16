@@ -13,8 +13,12 @@ struct BookmarkHome: View {
     @StateObject var vmm = MainViewModel()
     var columns = Array(repeating: GridItem(.flexible(), spacing: 15), count: 3)
     @Namespace var name
+    @State var showDetail=false
+    @State var gradient = PodcastModel()
     
     var body: some View {
+        ZStack{
+        
         VStack{
             
             HStack(spacing: 15){
@@ -83,9 +87,15 @@ struct BookmarkHome: View {
                             ForEach(vmm.pinnedViews,id:\.feedUrl){pinned in
                                 let v = PodcastModel(artistName: pinned.artistName, trackName: pinned.trackName, artworkUrl600: pinned.artworkUrl600, trackCount: pinned.trackCount, feedUrl: pinned.feedUrl)
                                 
-                                NavigationLink(destination: PodcastDetail(podcast:v)) {
+//                                NavigationLink(destination: PodcastDetail(podcast:v)) {
                                 PinnedBookmarkView(vmm:vmm,pinned:pinned,name:name)
-                                }
+                                    .onTapGesture(perform: {
+                                        withAnimation{
+                                            self.gradient=v
+                                            self.showDetail.toggle()
+                                        }
+                                    })
+//                                }
                             }
                         }
                         .padding()
@@ -96,9 +106,16 @@ struct BookmarkHome: View {
                         ForEach(vmm.secondfavoritePodcasts) { msg in
                             let v = PodcastModel(artistName: msg.artistName, trackName: msg.trackName, artworkUrl600: msg.artworkUrl600, trackCount: msg.trackCount, feedUrl: msg.feedUrl)
                             
-                            NavigationLink(destination: PodcastDetail(podcast:v)) {
+//                            NavigationLink(destination: PodcastDetail(podcast:v)) {
                             BookmarkView(vmm:vmm,msg:msg,name:name)
-                            }
+                                .onTapGesture(perform: {
+                                    withAnimation{
+                                        self.gradient=v
+                                        self.showDetail.toggle()
+                                        
+                                    }
+                                })
+//                            }
                         }
                     })
                     .padding(.vertical)
@@ -108,6 +125,14 @@ struct BookmarkHome: View {
                 
             }
             
+            
+        }
+        .opacity(showDetail ? 0 : 1)
+        
+            if showDetail {
+                PodcastDetail(podcast:gradient,showsss: $showDetail)
+                    .transition(.move(edge: .bottom))
+            }
             
         }
         .navigationBarHidden(true)

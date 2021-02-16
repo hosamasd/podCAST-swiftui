@@ -39,7 +39,7 @@ class PodcastModel:NSObject, Codable , NSCoding{
     }
     
     required init?(coder aDecoder: NSCoder) {
-        print("data to podcast")
+//        print("data to podcast")
         self.trackName = aDecoder.decodeObject(forKey: "trackName") as? String
         self.artistName = aDecoder.decodeObject(forKey: "artistName") as? String
         self.artworkUrl600 = aDecoder.decodeObject(forKey: "artworkUrl600") as? String

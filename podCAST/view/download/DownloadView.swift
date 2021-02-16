@@ -58,13 +58,15 @@ struct DownloadView: View {
                 WebImage(url: URL(string: msg.imageUrl?.toSecrueHttps() ?? "")!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 60)//, height: 60)
-                    .clipShape(Circle())
+                    .frame(width: 80,height: 80)//, height: 60)
+//                    .clipShape(Circle())
+                    .cornerRadius(12)
                     
                     Text("\(msg.sssss)")
                         .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .fontWeight(.regular)
                         .foregroundColor(.red)
+                        
                 
                 })
                 

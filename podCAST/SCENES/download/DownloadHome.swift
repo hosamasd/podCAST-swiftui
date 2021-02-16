@@ -72,8 +72,16 @@ struct DownloadHome: View {
                     LazyVStack(alignment: .leading, spacing: 0, content: {
                         
                         ForEach(vm.secondEposdeArray) { msg in
-                         
+                            let xxx = EpoisdesModel(title: msg.title, pubDate: msg.pubDate, description: msg.description,imageUrl:msg.imageUrl, author: msg.author, streamUrl: msg.streamUrl,fileUrl:msg.fileUrl)
+                            
                             DownloadView(msg:msg, vmm: vm)
+                                .onTapGesture {
+                                    withAnimation{
+                                        self.vmm.handlePlay(epo: xxx)
+
+                                    }
+                                }
+
                         }
                     })
                     .padding(.vertical)
@@ -105,9 +113,8 @@ struct DownloadHome: View {
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.downloadComplete))
                { obj in
                   // Change key as per your "userInfo"
-                   if let userInfo = obj.userInfo, let info = userInfo["info"] as? [String : Any] {
-                     print(info)
-                    self.vm.handleDownloadProgress(userInfo: info)
+            if let userInfo = obj.userInfo as? [String : Any] {
+                    self.vm.handleDownloadComplete(userInfo: userInfo)
                   }
             
         }

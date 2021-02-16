@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E00BD5525DA50D700817818 /* SoundVolumeCange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00BD5425DA50D700817818 /* SoundVolumeCange.swift */; };
+		4E00BD5825DA529800817818 /* VolumeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00BD5725DA529800817818 /* VolumeSlider.swift */; };
 		4E1FE46A25D939F900480E49 /* DownloadHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FE46925D939F900480E49 /* DownloadHome.swift */; };
 		4E1FE46E25D93A5D00480E49 /* DownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FE46D25D93A5D00480E49 /* DownloadViewModel.swift */; };
 		4E1FE47625D93B2500480E49 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FE47525D93B2500480E49 /* DownloadView.swift */; };
+		4E25B93725DB8A5B009F64B7 /* SSSecondMiniplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E25B93625DB8A5B009F64B7 /* SSSecondMiniplayer.swift */; };
 		4E2AB73325D7F30A00A2765A /* podCASTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2AB73225D7F30A00A2765A /* podCASTApp.swift */; };
 		4E2AB73525D7F30A00A2765A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2AB73425D7F30A00A2765A /* ContentView.swift */; };
 		4E2AB73725D7F30B00A2765A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E2AB73625D7F30B00A2765A /* Assets.xcassets */; };
@@ -43,9 +46,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E00BD5425DA50D700817818 /* SoundVolumeCange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundVolumeCange.swift; sourceTree = "<group>"; };
+		4E00BD5725DA529800817818 /* VolumeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSlider.swift; sourceTree = "<group>"; };
 		4E1FE46925D939F900480E49 /* DownloadHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadHome.swift; sourceTree = "<group>"; };
 		4E1FE46D25D93A5D00480E49 /* DownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewModel.swift; sourceTree = "<group>"; };
 		4E1FE47525D93B2500480E49 /* DownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
+		4E25B93625DB8A5B009F64B7 /* SSSecondMiniplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSecondMiniplayer.swift; sourceTree = "<group>"; };
 		4E2AB72F25D7F30A00A2765A /* podCAST.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podCAST.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E2AB73225D7F30A00A2765A /* podCASTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = podCASTApp.swift; sourceTree = "<group>"; };
 		4E2AB73425D7F30A00A2765A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -213,6 +219,7 @@
 				4E2AB74C25D7F39200A2765A /* hideKeyboard.swift */,
 				4EEFE5E925D8155000D880B9 /* RSSFeed.swift */,
 				4E9A2BCD25D8EB3000CDA33B /* Storages.swift */,
+				4E00BD5425DA50D700817818 /* SoundVolumeCange.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -240,6 +247,7 @@
 				4EEFE5F925D820D300D880B9 /* BlurView.swift */,
 				4E2AB78C25D800A700A2765A /* CShape.swift */,
 				4ECEEB1025D97608004E94A0 /* CustomTextField.swift */,
+				4E00BD5725DA529800817818 /* VolumeSlider.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -267,6 +275,7 @@
 				4EEFE5FF25D823EC00D880B9 /* MiniPlayerView.swift */,
 				4EEFE5F625D820AD00D880B9 /* Miniplayer.swift */,
 				4E9A2BC925D8E53B00CDA33B /* SecondMiniplayer.swift */,
+				4E25B93625DB8A5B009F64B7 /* SSSecondMiniplayer.swift */,
 			);
 			path = mini;
 			sourceTree = "<group>";
@@ -418,6 +427,7 @@
 				4E2AB78825D8007000A2765A /* SearchView.swift in Sources */,
 				4E2AB75C25D7F66C00A2765A /* SingeltonAPI.swift in Sources */,
 				4E2AB76025D7F6FA00A2765A /* SearchViewModel.swift in Sources */,
+				4E00BD5825DA529800817818 /* VolumeSlider.swift in Sources */,
 				4E9A2BC625D8E1BD00CDA33B /* CustomTabView.swift in Sources */,
 				4E2AB75725D7F64E00A2765A /* EpoisdesModel.swift in Sources */,
 				4E2AB74D25D7F39200A2765A /* hideKeyboard.swift in Sources */,
@@ -427,6 +437,7 @@
 				4ECEEB1125D97608004E94A0 /* CustomTextField.swift in Sources */,
 				4EEFE5E325D80F9D00D880B9 /* PodcastDetail.swift in Sources */,
 				4E9A2BC225D8E12100CDA33B /* MaivView.swift in Sources */,
+				4E00BD5525DA50D700817818 /* SoundVolumeCange.swift in Sources */,
 				4E9A2BCA25D8E53B00CDA33B /* SecondMiniplayer.swift in Sources */,
 				4EEFE5FD25D8218400D880B9 /* MainViewModel.swift in Sources */,
 				4EEFE5E725D80FBA00D880B9 /* DetailViewModel.swift in Sources */,
@@ -434,6 +445,7 @@
 				4E2AB73525D7F30A00A2765A /* ContentView.swift in Sources */,
 				4EEFE5EF25D816D000D880B9 /* AlbumView.swift in Sources */,
 				4E2AB78D25D800A700A2765A /* CShape.swift in Sources */,
+				4E25B93725DB8A5B009F64B7 /* SSSecondMiniplayer.swift in Sources */,
 				4EEFE5F725D820AD00D880B9 /* Miniplayer.swift in Sources */,
 				4EFD7A3E25D8F7CA001C2F66 /* BookmarkHome.swift in Sources */,
 				4E64608A25D9285900AEB43D /* BookmarkView.swift in Sources */,

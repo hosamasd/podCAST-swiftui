@@ -63,9 +63,61 @@ class DownloadViewModel: ObservableObject {
 
         DispatchQueue.main.async {
             if let index = self.secondEposdeArray.firstIndex(where: {$0.title == title}) {
-                self.secondEposdeArray[index].sssss = progress
+                self.secondEposdeArray[index].sssss = self.getPercentage(progress)
+//                  self.getPercentage(progress, completion: { (v) in
+//                    self.secondEposdeArray[index].sssss = v
+//                })//progress
             }
         }
         
      }
+    
+    func handleDownloadComplete(userInfo: [String:Any]?){
+        guard let userInfo = userInfo as? [String:Any] else { return  }
+       guard let title = userInfo["title"] as? String else { return  }
+       guard let fileUrl = userInfo["fileUrl"] as? String else { return  }
+       
+        var downloadeEpoisde = UserDefaults.standard.downloadedEpoisde()
+        if let index = downloadeEpoisde.firstIndex(where: {$0.title == title}) {
+            
+            downloadeEpoisde[index].fileUrl = fileUrl
+            
+            do{
+                let data = try JSONEncoder().encode(downloadeEpoisde)
+                UserDefaults.standard.set(data, forKey: UserDefaults.downloadEpoisdeKey)
+                
+            }catch let err {
+                print("can not encode with file url ",err)
+            }
+        }
+       
+    }
+    
+//    func getPercentage(_ v:String,  completion: @escaping ((String)->()))  {
+//        var xx = v
+//
+//        if v == "100%" {
+//
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+//                xx =  ""
+//                completion(xx)
+//            }
+//        }else {
+//            completion(xx)
+//        }
+//    }
+    
+    func getPercentage(_ v:String)->String  {
+        var xx = v
+        
+        if v == "100%" {
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+//                xx =  ""
+//            }
+            xx=""
+    return xx
+        }else {
+    return xx
+        }
+    }
 }
