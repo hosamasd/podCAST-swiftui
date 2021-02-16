@@ -118,6 +118,7 @@ struct SecondPodcastDetail: View {
                                         self.vmm.selectedPodacst = gradient
                                         self.vmm.show.toggle()
                                         self.vmm.showTextDownload = true
+                                        self.vmm.playListEpodsed = vm.eposdeArray
                                     }, label: {
                                         Text("Play")
                                             .foregroundColor(.green)

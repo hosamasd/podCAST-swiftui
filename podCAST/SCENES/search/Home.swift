@@ -19,7 +19,7 @@ struct Home: View {
     @State private var becomeFirstResponder = false
     @State var showDetail=false
     @State var gradient = PodcastModel()
-    
+    @State var myInput: String = ""
     var body: some View {
         
         ZStack {
@@ -31,9 +31,10 @@ struct Home: View {
                     if show{
                         
                         //                CustomTextField(becomeFirstResponder: $becomeFirstResponder,text: $vm.txt)
+//                        TextField("Search Podcasts", text: $myInput)
                         TextField("Search Podcasts", text: $vm.txt)
                             // search Bar Functionality...
-                            
+                            .textFieldStyle(RoundedBorderTextFieldStyle.init())
                             .onChange(of: vm.txt) { (value) in
                                 
                                 vm.makeSearchOperation()
@@ -69,7 +70,7 @@ struct Home: View {
                         Button(action: {
                             
                             withAnimation(.easeOut){
-                                self.becomeFirstResponder.toggle()
+//                                self.becomeFirstResponder.toggle()
                                 show.toggle()
                             }
                             
@@ -148,7 +149,7 @@ struct Home: View {
                             
                             // assigning name as ID...
                             
-                            ForEach(vm.poadcastArray,id: \.feedUrl){gradient in
+                            ForEach(vm.poadcastArray,id:\.artworkUrl600){gradient in
                                 
                                 //                        NavigationLink(destination: PodcastDetail(podcast:gradient)) {
                                 SearchView(columns: $columns, gradient: gradient, vm: vm)

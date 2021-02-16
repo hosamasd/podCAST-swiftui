@@ -72,6 +72,52 @@ class MainViewModel: ObservableObject {
     
     @Published var isPlaying = false
     
+    @Published var playListEpodsed = [EpoisdesModel]()
+    
+  func  handlePreviousEpoisde(){
+        if playListEpodsed.count == 0  {
+            return
+        }
+        
+    let currenIndex = playListEpodsed.firstIndex {(ep) -> Bool in
+            return self.selectedPodacst.title == ep.title &&
+                self.selectedPodacst.author == ep.author
+        }
+//
+        guard let index = currenIndex else { return  }
+
+        let previousEpoisde:EpoisdesModel
+        if index == playListEpodsed.count - 1 {
+            previousEpoisde = playListEpodsed[index]
+        }else {
+            previousEpoisde = playListEpodsed[0]
+        }
+
+        self.selectedPodacst = previousEpoisde
+    }
+    
+    func  handleNextEpoisde(){
+          if playListEpodsed.count == 0  {
+              return
+          }
+
+        let currenIndex = playListEpodsed.firstIndex {(ep) -> Bool in
+              return self.selectedPodacst.title == ep.title &&
+                  self.selectedPodacst.author == ep.author
+          }
+
+          guard let index = currenIndex else { return  }
+
+          let previousEpoisde:EpoisdesModel
+          if index == playListEpodsed.count - 1 {
+              previousEpoisde = playListEpodsed[0]
+          }else {
+              previousEpoisde = playListEpodsed[index+1]
+          }
+
+          self.selectedPodacst = previousEpoisde
+      }
+    
     func playEpoisde()  {
         if selectedPodacst.fileUrl != nil {
             playEpoisdeUsingFileUrl()
@@ -106,7 +152,7 @@ class MainViewModel: ObservableObject {
         
         let ss = selectedPodacst.streamUrl.hasSuffix(".mp3")
         
-        guard let url = URL(string: selectedPodacst.streamUrl ) else { return }
+        guard let url = URL(string: selectedPodacst.streamUrl.toSecrueHttps() ) else { return }
         
         
         do {
@@ -400,22 +446,35 @@ class MainViewModel: ObservableObject {
         
         // 160 width 20 circle size...
         // total 180
-        if value.location.x >= 0 && value.location.x <= UIScreen.main.bounds.width - 110{
+        
+        if value.location.x >= 0 && value.location.x <= UIScreen.main.bounds.width - 180{
             
             // updating volume...
-            let progress = value.location.x / UIScreen.main.bounds.width - 90
-            
-            guard let totalSec = avPlayer.currentItem?.duration else { return  }
-            
-            let ss =    CMTimeGetSeconds(totalSec)
-            let ff =  TimeInterval(ss)
-            let time = TimeInterval(progress) * ff
-            //            avPlayer.seek(to: )
-            //            avPlayer.play()
-            //            seekToCurrentTimes(delta: Int64(progress))
-            avPlayer.volume = Float(progress)
-            withAnimation(Animation.linear(duration: 0.1)){epoSlider = value.location.x}
+            let progress = value.location.x / UIScreen.main.bounds.width - 180
+            player.volume = Float(progress)
+            withAnimation(Animation.linear(duration: 0.1)){volume = value.location.x}
         }
+            
+        // Updating Volume....
+        
+        // 160 width 20 circle size...
+        // total 180
+//        if value.location.x >= 0 && value.location.x <= UIScreen.main.bounds.width - 110{
+//
+//            // updating volume...
+//            let progress = value.location.x / UIScreen.main.bounds.width - 90
+//
+//            guard let totalSec = avPlayer.currentItem?.duration else { return  }
+//
+//            let ss =    CMTimeGetSeconds(totalSec)
+//            let ff =  TimeInterval(ss)
+//            let time = TimeInterval(progress) * ff
+//            //            avPlayer.seek(to: )
+//            //            avPlayer.play()
+//            //            seekToCurrentTimes(delta: Int64(progress))
+//            avPlayer.volume = Float(progress)
+//            withAnimation(Animation.linear(duration: 0.1)){epoSlider = value.location.x}
+//        }
         //        print(value.location.x)
     }
     

@@ -31,11 +31,12 @@ class PodcastModel:NSObject, Codable , NSCoding{
     
     
     func encode(with aCoder: NSCoder) {
-        print("podcast to data")
+//        print("podcast to data")
         aCoder.encode(trackName ?? "",forKey: "trackName")
         aCoder.encode(artistName ?? "",forKey: "artistName")
         aCoder.encode(artworkUrl600 ?? "",forKey: "artworkUrl600")
         aCoder.encode(feedUrl ?? "",forKey: "feedUrl")
+//        aCoder.encode(id ?? "", forKey:"id")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,12 +45,12 @@ class PodcastModel:NSObject, Codable , NSCoding{
         self.artistName = aDecoder.decodeObject(forKey: "artistName") as? String
         self.artworkUrl600 = aDecoder.decodeObject(forKey: "artworkUrl600") as? String
         self.feedUrl = aDecoder.decodeObject(forKey: "feedUrl") as? String
-        
+//        self.id = UUID().uuidString
     }
     
     
     
-    
+//    var id = UUID().uuidString
     var artistName:String?
     var trackName:String?
     var artworkUrl600:String?

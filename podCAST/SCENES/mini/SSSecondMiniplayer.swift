@@ -128,7 +128,9 @@ struct SSSecondMiniplayer: View {
                     })
                     
                     Button(action: {
-                        
+                        withAnimation{
+                            self.vm.handleNextEpoisde()
+                        }
                     }, label: {
                         Image(systemName: "forward.fill")
                             .font(.title2)
@@ -203,124 +205,6 @@ struct SSSecondMiniplayer: View {
                 .padding()
                 
                 Spacer(minLength: 0)
-                
-                // Timings...
-                
-//                HStack{
-//
-//                    Text(vm.epopCurrentTimeValue)
-//                        .font(.caption2)
-//                        .foregroundColor(.black)
-//
-//                    Spacer()
-//
-//                    Text(vm.epopTotalTimeValue)
-//                        .font(.caption2)
-//                        .foregroundColor(.black)
-//                }
-//                .padding(.horizontal)
-////                .padding(.top, 25)
-//
-//                ZStack(alignment: Alignment(horizontal: .leading, vertical: .center), content: {
-//
-//                    Capsule()
-//                        .fill(Color.gray.opacity(0.2))
-//                        .frame(height: 6)
-//
-//                    ZStack(alignment: Alignment(horizontal: .trailing, vertical: .center)) {
-//
-//                        Capsule()
-//                            .fill(Color("Color1").opacity(0.6))
-//                            .frame(width: vm.epovTimeValue,height: 6)
-//
-//                        // Drag Button....
-//
-//                        Circle()
-//                            .fill(Color("Color1").opacity(0.7))
-//                            .frame(width: 10, height: 10)
-//                            .padding(.all, 10)
-//                            .background(Color("Color"))
-//                            .clipShape(Circle())
-//                        // adding shadow...
-//                            .shadow(color: Color("Color1").opacity(0.6),radius: 10,x: 4,y: 2)
-//                    }
-//                })
-//
-//
-//
-//                // adding gesture..
-//                .gesture(DragGesture().onChanged(vm.trackSliderTimer))
-//                .padding(.horizontal)
-//                .padding(.top, 8)
-                
-                Spacer(minLength: 0)
-                
-                HStack (spacing:15) {
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        withAnimation{
-                            vm.seekToCurrentTimes(delta: -15)
-                        }
-                    }, label: {
-                        Image(systemName: "goforward.15")
-                            .font(.largeTitle)
-                            .foregroundColor(.primary)
-                    })
-                    
-                    Button(action: {
-                        withAnimation{
-                            vm.seekToCurrentTimes(delta: 15)
-                        }
-                    }, label: {
-                        Image(systemName: "gobackward.15")
-                            .font(.largeTitle)
-                            .foregroundColor(.primary)
-                    })
-                    
-                    Spacer()
-                    
-                    
-                }
-                
-                HStack(spacing:15) {
-                    Image(systemName: "speaker.fill")
-                    
-                    ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
-                        
-                        Capsule()
-                            .fill(Color.black.opacity(0.06))
-                            .frame(height: 4)
-                        
-                        Capsule()
-                            .fill(Color("orange"))
-                            .frame(width: vm.epoSlider, height: 4)
-                        
-                        // Slider....
-                        
-                        Circle()
-                            .fill(Color("orange"))
-                            .frame(width: 20, height: 20)
-                        // gesture....
-                            .offset(x: vm.epoSlider)
-                            .gesture(DragGesture().onChanged(vm.updateVolume(value:)))
-                    }
-                    // default Frame...
-//                    .frame(width: UIScreen.main.bounds.width - 160)
-                    
-//                    Slider(value: $vm.soundLevel, in: 0...1,step: 0.0625, onEditingChanged: { data in
-                        
-//                        MPVolumeView.setVolume(self.vm.soundLevel)
-//                            })
-//                    Slider(value:$slider)
-                    
-                    Image(systemName: "speaker.wave.2.fill")
-                }
-                .padding()
-                
-               
-                .padding(.bottom,safeArea?.bottom == 0 ? 15 : safeArea?.bottom)
             }
             .frame( height:vm.expand ? nil : 0)
             .opacity(vm.expand ? 1 : 0)
@@ -347,7 +231,11 @@ struct SSSecondMiniplayer: View {
         })
         .onReceive(timer) { (_) in
             if vm.haveChaned{
-                vm.playEpoisde()
+                DispatchQueue.main.async {
+                    
+                
+                    self.vm.playEpoisde()
+            }
                 return
 //                timer.delay(for: .milliseconds(10), scheduler: .zero)
             }else {

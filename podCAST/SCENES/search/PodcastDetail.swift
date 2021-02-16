@@ -124,6 +124,7 @@ struct PodcastDetail: View {
                                                     Button(action: {
                                                         withAnimation{
                                                             self.vmm.handlePlay(epo: gradient)
+                                                            self.vmm.playListEpodsed = vm.eposdeArray
                                                         }
                                                     }, label: {
                                                         Text("Play")
@@ -135,7 +136,7 @@ struct PodcastDetail: View {
 //                                                        self.vmm.show.toggle()
 //                                                        self.vmm.showTextDownload = true
                                                         self.vmm.download(eposide: gradient)
-                                                        
+                                                        self.vmm.playListEpodsed = []
                                                     }, label: {
                                                         Text("Download")
                                                             .foregroundColor(.red)
