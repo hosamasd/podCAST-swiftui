@@ -15,7 +15,9 @@ class MainViewModel: ObservableObject {
     @Published var isMiniPlayer = false
     @Published var height:CGFloat = 0
     @Published var width:CGFloat = UIScreen.main.bounds.width
-    
+    @Published var alert = false
+    @Published var alertMsg = ""
+    @Published var podcastAlert = EpoisdesModel(title: "", pubDate: Date(), description: "", author: "", streamUrl: "")
     @Published var show = false
     @Published var expand = false
     
@@ -133,6 +135,39 @@ class MainViewModel: ObservableObject {
             self.selectedPodacst = epo
         }
     }
+    
+    func handleDownloadTap(epo:EpoisdesModel)  {
+        if epo.fileUrl == nil {
+            self.alert.toggle()
+            self.alertMsg = "you don't download this item before do you want to watch it stream? "
+            self.podcastAlert=epo
+        }
+        else {
+            handlePlay(epo: epo)
+        }
+    }
+    
+    func handleDownloadComplete(userInfo: [String:Any]?){
+        guard let userInfo = userInfo as? [String:Any] else { return  }
+       guard let title = userInfo["title"] as? String else { return  }
+       guard let fileUrl = userInfo["fileUrl"] as? URL else { return  }
+       
+        var downloadeEpoisde = UserDefaults.standard.downloadedEpoisde()
+        if let index = downloadeEpoisde.firstIndex(where: {$0.title == title}) {
+            
+            downloadeEpoisde[index].fileUrl = fileUrl.absoluteString
+            self.podcastAlert.fileUrl = fileUrl.absoluteString
+            do{
+                let data = try JSONEncoder().encode(downloadeEpoisde)
+                UserDefaults.standard.set(data, forKey: UserDefaults.downloadEpoisdeKey)
+                
+            }catch let err {
+                print("can not encode with file url ",err)
+            }
+        }
+       
+    }
+    
     
     func getDefaultPlayer()  {
         guard let url = URL(string: selectedPodacst.streamUrl ) else { return }

@@ -77,7 +77,7 @@ struct DownloadHome: View {
                             DownloadView(msg:msg, vmm: vm)
                                 .onTapGesture {
                                     withAnimation{
-                                        self.vmm.handlePlay(epo: xxx)
+                                        self.vmm.handleDownloadTap(epo: xxx)
 
                                     }
                                 }
@@ -114,15 +114,17 @@ struct DownloadHome: View {
                { obj in
                   // Change key as per your "userInfo"
             if let userInfo = obj.userInfo as? [String : Any] {
-                    self.vm.handleDownloadComplete(userInfo: userInfo)
+//                    self.vm.handleDownloadComplete(userInfo: userInfo)
+                self.vmm.handleDownloadComplete(userInfo: userInfo)
                   }
             
         }
-        
-        
-//        .onReceive(NotificationCenter.default.addObserver, perform: { _ in
-//            /*@START_MENU_TOKEN@*//*@PLACEHOLDER=code@*/ /*@END_MENU_TOKEN@*/
-//        })
+        .alert(isPresented: $vmm.alert) {
+            
+            Alert(title: Text("Item not found"), message: Text(self.vmm.alertMsg), primaryButton: .default(Text("OK"), action: {
+                self.vmm.handlePlay(epo: self.vmm.podcastAlert)
+            }), secondaryButton: .cancel())
+        }
     }
 }
 

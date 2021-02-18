@@ -72,26 +72,26 @@ class DownloadViewModel: ObservableObject {
         
      }
     
-    func handleDownloadComplete(userInfo: [String:Any]?){
-        guard let userInfo = userInfo as? [String:Any] else { return  }
-       guard let title = userInfo["title"] as? String else { return  }
-       guard let fileUrl = userInfo["fileUrsl"] as? String else { return  }
-       
-        var downloadeEpoisde = UserDefaults.standard.downloadedEpoisde()
-        if let index = downloadeEpoisde.firstIndex(where: {$0.title == title}) {
-            
-            downloadeEpoisde[index].fileUrl = fileUrl
-            
-            do{
-                let data = try JSONEncoder().encode(downloadeEpoisde)
-                UserDefaults.standard.set(data, forKey: UserDefaults.downloadEpoisdeKey)
-                
-            }catch let err {
-                print("can not encode with file url ",err)
-            }
-        }
-       
-    }
+//    func handleDownloadComplete(userInfo: [String:Any]?){
+//        guard let userInfo = userInfo as? [String:Any] else { return  }
+//       guard let title = userInfo["title"] as? String else { return  }
+//       guard let fileUrl = userInfo["fileUrl"] as? URL else { return  }
+//       
+//        var downloadeEpoisde = UserDefaults.standard.downloadedEpoisde()
+//        if let index = downloadeEpoisde.firstIndex(where: {$0.title == title}) {
+//            
+//            downloadeEpoisde[index].fileUrl = fileUrl.absoluteString
+//           
+//            do{
+//                let data = try JSONEncoder().encode(downloadeEpoisde)
+//                UserDefaults.standard.set(data, forKey: UserDefaults.downloadEpoisdeKey)
+//                
+//            }catch let err {
+//                print("can not encode with file url ",err)
+//            }
+//        }
+//       
+//    }
     
 //    func getPercentage(_ v:String,  completion: @escaping ((String)->()))  {
 //        var xx = v
