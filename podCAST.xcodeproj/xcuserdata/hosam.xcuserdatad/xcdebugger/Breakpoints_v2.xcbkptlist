@@ -14,8 +14,8 @@
             filePath = "podCAST/services/SingeltonAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "registerationGetMethodGenerics(urlString:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "podCAST/services/SingeltonAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "registerationGetMethodGenerics(urlString:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "podCAST/services/SingeltonAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "getPodcast(text:completion:)"
             landmarkType = "7">
          </BreakpointContent>

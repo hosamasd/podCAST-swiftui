@@ -132,9 +132,6 @@ struct PodcastDetail: View {
                                                     })
                                                     
                                                     Button(action: {
-                                                        //                                                        self.vmm.selectedPodacst = gradient
-                                                        //                                                        self.vmm.show.toggle()
-                                                        //                                                        self.vmm.showTextDownload = true
                                                         self.vmm.download(eposide: gradient)
                                                         self.vmm.playListEpodsed = []
                                                     }, label: {
