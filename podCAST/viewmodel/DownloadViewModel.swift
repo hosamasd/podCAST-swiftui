@@ -18,6 +18,8 @@ class DownloadViewModel: ObservableObject {
     
     func getDownloads()  {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+            self.eposdeArray.removeAll()
+            self.secondEposdeArray.removeAll()
             let ss = UserDefaults.standard.downloadedEpoisde()
             ss.forEach { (p) in
                 let d = SecondEpoisdesModel(title: p.title, pubDate: p.pubDate, description: p.description,imageUrl:p.imageUrl, author: p.author, streamUrl: p.streamUrl,fileUrl:p.fileUrl,offset:0)

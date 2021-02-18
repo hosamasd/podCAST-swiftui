@@ -12,7 +12,7 @@ struct DownloadHome: View {
     @EnvironmentObject var vmm: MainViewModel
     @StateObject var vm = DownloadViewModel()
     var columns = Array(repeating: GridItem(.flexible(), spacing: 15), count: 3)
-    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack{
             
@@ -118,6 +118,13 @@ struct DownloadHome: View {
                 self.vmm.handleDownloadComplete(userInfo: userInfo)
                   }
             
+        }
+        .onReceive(timer) { (_) in
+            if vmm.refreshDownload{
+                self.vm.getDownloads()
+                self.vmm.refreshDownload=false
+            }
+           
         }
         .alert(isPresented: $vmm.alert) {
             

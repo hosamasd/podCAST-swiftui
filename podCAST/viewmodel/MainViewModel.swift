@@ -17,6 +17,7 @@ class MainViewModel: ObservableObject {
     @Published var width:CGFloat = UIScreen.main.bounds.width
     @Published var alert = false
     @Published var alertMsg = ""
+    @Published var refreshDownload = false
     @Published var podcastAlert = EpoisdesModel(title: "", pubDate: Date(), description: "", author: "", streamUrl: "")
     @Published var show = false
     @Published var expand = false
@@ -160,7 +161,7 @@ class MainViewModel: ObservableObject {
             do{
                 let data = try JSONEncoder().encode(downloadeEpoisde)
                 UserDefaults.standard.set(data, forKey: UserDefaults.downloadEpoisdeKey)
-                
+                self.refreshDownload=true
             }catch let err {
                 print("can not encode with file url ",err)
             }

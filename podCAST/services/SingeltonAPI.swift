@@ -154,9 +154,9 @@ extension APIServices {
                 if FileManager.default.fileExists(atPath: pdfFileURL.path) {
                     print("pdfFileURL present!") // Confirm that the file is here!
                 }
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .downloadComplete, object: nil, userInfo: ["title":self.eposide.title,"fileUrl":pdfFileURL])
-                }
+//                }
             })
         } catch {
             print(error.localizedDescription)
