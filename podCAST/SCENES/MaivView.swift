@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MaivView: View {
-    @State var selected = "Favorite"
+    @State var selected = "Search"
     @Namespace var animation
     @State var expand = false
 //    @StateObject var vmm = MainViewModel()
@@ -46,8 +46,9 @@ struct MaivView: View {
             if vmm.show {
                 
 //                SecondMiniplayer()
-                SSSecondMiniplayer(animation: animation)
-//                SecondMiniplayer(animation: animation)
+                
+//                SSSecondMiniplayer(animation: animation)
+                SecondMiniplayer(animation: animation)
                     .padding(.bottom,vmm.expand ? 0 : 20)
                 
             }

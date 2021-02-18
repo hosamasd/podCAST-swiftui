@@ -32,7 +32,7 @@ struct PodcastDetail: View {
                     
                     Button(action: {
                         withAnimation {
-//                            presentationMode.wrappedValue.dismiss()
+                            //                            presentationMode.wrappedValue.dismiss()
                             self.showsss.toggle()
                         }
                     }, label: {
@@ -132,9 +132,9 @@ struct PodcastDetail: View {
                                                     })
                                                     
                                                     Button(action: {
-//                                                        self.vmm.selectedPodacst = gradient
-//                                                        self.vmm.show.toggle()
-//                                                        self.vmm.showTextDownload = true
+                                                        //                                                        self.vmm.selectedPodacst = gradient
+                                                        //                                                        self.vmm.show.toggle()
+                                                        //                                                        self.vmm.showTextDownload = true
                                                         self.vmm.download(eposide: gradient)
                                                         self.vmm.playListEpodsed = []
                                                     }, label: {
@@ -169,8 +169,8 @@ struct PodcastDetail: View {
         })
         .environmentObject(vm)
         
-//        .navigationBarHidden(true)
-//        .navigationBarTitle("")
+        //        .navigationBarHidden(true)
+        //        .navigationBarTitle("")
         .edgesIgnoringSafeArea(.all)
         
         .onAppear(perform: {

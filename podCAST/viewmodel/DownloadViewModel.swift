@@ -75,7 +75,7 @@ class DownloadViewModel: ObservableObject {
     func handleDownloadComplete(userInfo: [String:Any]?){
         guard let userInfo = userInfo as? [String:Any] else { return  }
        guard let title = userInfo["title"] as? String else { return  }
-       guard let fileUrl = userInfo["fileUrl"] as? String else { return  }
+       guard let fileUrl = userInfo["fileUrsl"] as? String else { return  }
        
         var downloadeEpoisde = UserDefaults.standard.downloadedEpoisde()
         if let index = downloadeEpoisde.firstIndex(where: {$0.title == title}) {

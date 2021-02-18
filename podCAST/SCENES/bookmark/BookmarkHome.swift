@@ -10,11 +10,12 @@ import SDWebImageSwiftUI
 
 struct BookmarkHome: View {
     
-    @StateObject var vmm = MainViewModel()
+    @EnvironmentObject var vmm: MainViewModel
     var columns = Array(repeating: GridItem(.flexible(), spacing: 15), count: 3)
     @Namespace var name
     @State var showDetail=false
     @State var gradient = PodcastModel()
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack{
@@ -40,39 +41,39 @@ struct BookmarkHome: View {
             
             // Vstack Bug..
             
-            if vmm.secondfavoritePodcasts.isEmpty{
-                
-                if vmm.notFoundData {
-                    Text("No Favorites yet!")
-                        .fontWeight(.semibold)
-                        .font(.system(size: 18))
-                        .padding(.top,55)
-                    
-                    Spacer()
-                }
-                else {
-                    // loading View...
-                    ProgressView()
-                        .padding(.top,55)
-                    
-                    Spacer()
-                }
-            }
-//            if vmm.notFoundData {
-//                Text("No search artist done before!")
-//                    .fontWeight(.semibold)
-//                    .font(.system(size: 18))
-//                    .padding(.top,55)
+//            if vmm.secondfavoritePodcasts.isEmpty{
 //
-//                Spacer()
-//            } else  if vmm.secondfavoritePodcasts.isEmpty{
+//                if vmm.notFoundData {
+//                    Text("No Favorites yet!")
+//                        .fontWeight(.semibold)
+//                        .font(.system(size: 18))
+//                        .padding(.top,55)
 //
-//                // loading View...
-//                ProgressView()
-//                    .padding(.top,55)
+//                    Spacer()
+//                }
+//                else {
+//                    // loading View...
+//                    ProgressView()
+//                        .padding(.top,55)
 //
-//                Spacer()
+//                    Spacer()
+//                }
 //            }
+            if vmm.notFoundData {
+                Text("No search artist done before!")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 18))
+                    .padding(.top,55)
+
+                Spacer()
+            } else  if vmm.secondfavoritePodcasts.isEmpty{
+
+                // loading View...
+                ProgressView()
+                    .padding(.top,55)
+
+                Spacer()
+            }
             
             else {
                 
@@ -140,6 +141,13 @@ struct BookmarkHome: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             self.vmm.getFavorites()
+        }
+        .onReceive(timer) { (_) in
+            if vmm.checkBookmarkChanged{
+                self.vmm.getFavorites()
+                self.vmm.checkBookmarkChanged=false
+            }
+           
         }
     }
     
