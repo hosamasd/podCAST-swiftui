@@ -38,7 +38,7 @@ class SearchViewModel: ObservableObject {
             
             APIServices.shared.getPodcast(text: self.txt) { (pods, err) in
                 
-                if let err=err {
+                if err != nil {
                     self.notFoundData=true
                     self.isLoading=false
                 }

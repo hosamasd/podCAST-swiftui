@@ -8,6 +8,7 @@
 import SwiftUI
 import AVKit
 import UIKit
+import MediaPlayer
 
 class MainViewModel: ObservableObject {
     
@@ -72,7 +73,7 @@ class MainViewModel: ObservableObject {
     
     @Published var playListEpodsed = [EpoisdesModel]()
     
-    func  handlePreviousEpoisde(){
+     func  handlePreviousEpoisde(){
         if playListEpodsed.count == 0  {
             return
         }
@@ -94,7 +95,7 @@ class MainViewModel: ObservableObject {
         self.selectedPodacst = previousEpoisde
     }
     
-    func  handleNextEpoisde(){
+     func  handleNextEpoisde(){
         if playListEpodsed.count == 0  {
             return
         }
@@ -408,6 +409,91 @@ class MainViewModel: ObservableObject {
             dateFormatter.dateFormat = "EEEE"
             return dateFormatter.string(from: selectedPodacst.pubDate)
         }
+    }
+    
+    //TODO: -//for playing in background and control auido in this place
+    
+    func setupRemoteControl()  {
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        let command = MPRemoteCommandCenter.shared()
+        
+        command.playCommand.isEnabled = true
+        command.playCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+            self.avPlayer.play()
+//            self.playPauseButton.setImage(#imageLiteral(resourceName: "play-button-1"), for: .normal)
+//            self.miniEpoisdePauseButton.setImage(#imageLiteral(resourceName: "play-button-1"), for: .normal)
+            self.elipshedTime(playbackRate: 1)
+           
+            return .success
+        }
+        command.pauseCommand.isEnabled = true
+        command.pauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+            self.avPlayer.pause()
+//            self.playPauseButton.setImage(#imageLiteral(resourceName: "pause-button"), for: .normal)
+//            self.miniEpoisdePauseButton.setImage(#imageLiteral(resourceName: "pause-button"), for: .normal)
+            
+            self.elipshedTime(playbackRate: 0)
+            return .success
+        }
+        
+        command.togglePlayPauseCommand.isEnabled = true
+        command.togglePlayPauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
+            self.handlPlaying()
+            return .success
+        }
+        command.nextTrackCommand.addTarget(self, action: #selector(handleNextEpoisdes))
+        command.previousTrackCommand.addTarget(self, action: #selector(handlePreviousEpoisdes))
+    }
+    
+    func elipshedTime(playbackRate: Float)  {
+        let elipshedTime = CMTimeGetSeconds(avPlayer.currentTime())
+        
+         MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = elipshedTime
+         MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPNowPlayingInfoPropertyPlaybackRate] = playbackRate
+    }
+    
+    @objc func handleNextEpoisdes(){
+
+        if playListEpodsed.count == 0 {
+            return
+        }
+        let currenIndex = playListEpodsed.index {(ep) -> Bool in
+            return self.epoisde.title == ep.title &&
+            self.epoisde.author == ep.author
+        }
+
+        guard let index = currenIndex else { return  }
+
+        let nextEpoisde:EpoisdesModel
+        if index == playListEpodsed.count - 1 {
+            nextEpoisde = playListEpodsed[0]
+        }else {
+            nextEpoisde = playListEpodsed[index + 1]
+        }
+
+        self.selectedPodacst = nextEpoisde
+    }
+    
+    @objc func  handlePreviousEpoisdes(){
+        if playListEpodsed.count == 0  {
+            return
+        }
+        
+        let currenIndex = playListEpodsed.firstIndex {(ep) -> Bool in
+            return self.selectedPodacst.title == ep.title &&
+                self.selectedPodacst.author == ep.author
+        }
+        //
+        guard let index = currenIndex else { return  }
+        
+        let previousEpoisde:EpoisdesModel
+        if index == playListEpodsed.count - 1 {
+            previousEpoisde = playListEpodsed[index]
+        }else {
+            previousEpoisde = playListEpodsed[0]
+        }
+        
+        self.selectedPodacst = previousEpoisde
     }
 }
 

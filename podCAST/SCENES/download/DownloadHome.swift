@@ -78,10 +78,10 @@ struct DownloadHome: View {
                                 .onTapGesture {
                                     withAnimation{
                                         self.vmm.handleDownloadTap(epo: xxx)
-
+                                        
                                     }
                                 }
-
+                            
                         }
                     })
                     .padding(.vertical)
@@ -100,31 +100,31 @@ struct DownloadHome: View {
             self.vm.getDownloads()
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.downloadProgress))
-               { obj in
+        { obj in
             
-                  // Change key as per your "userInfo"
-                   if let userInfo = obj.userInfo as? [String : Any] {
-//                     print(info)
-                    self.vm.handleDownloadProgress(userInfo: userInfo )
-                  }
+            // Change key as per your "userInfo"
+            if let userInfo = obj.userInfo as? [String : Any] {
+                //                     print(info)
+                self.vm.handleDownloadProgress(userInfo: userInfo )
+            }
             
         }
         
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.downloadComplete))
-               { obj in
-                  // Change key as per your "userInfo"
+        { obj in
+            // Change key as per your "userInfo"
             if let userInfo = obj.userInfo as? [String : Any] {
-//                    self.vm.handleDownloadComplete(userInfo: userInfo)
+                //                    self.vm.handleDownloadComplete(userInfo: userInfo)
                 self.vmm.handleDownloadComplete(userInfo: userInfo)
-                  }
+            }
             
         }
         .onReceive(timer) { (_) in
             if vmm.refreshDownload{
-                self.vm.getDownloads()
+                //                self.vm.getDownloads()
                 self.vmm.refreshDownload=false
             }
-           
+            
         }
         .alert(isPresented: $vmm.alert) {
             

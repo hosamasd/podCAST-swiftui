@@ -31,7 +31,7 @@ struct Home: View {
                     if show{
                         
                         //                CustomTextField(becomeFirstResponder: $becomeFirstResponder,text: $vm.txt)
-//                        TextField("Search Podcasts", text: $myInput)
+                        //                        TextField("Search Podcasts", text: $myInput)
                         TextField("Search Podcasts", text: $vm.txt)
                             // search Bar Functionality...
                             .textFieldStyle(RoundedBorderTextFieldStyle.init())
@@ -70,7 +70,7 @@ struct Home: View {
                         Button(action: {
                             
                             withAnimation(.easeOut){
-//                                self.becomeFirstResponder.toggle()
+                                //                                self.becomeFirstResponder.toggle()
                                 show.toggle()
                             }
                             
@@ -176,7 +176,7 @@ struct Home: View {
             if showDetail {
                 PodcastDetail(podcast:gradient,showsss: $showDetail)
                     .transition(.move(edge: .bottom))
-//                    .opacity(!showDetail ? 0 : 1)
+                //                    .opacity(!showDetail ? 0 : 1)
             }
             
         }
