@@ -74,7 +74,7 @@ class MainViewModel: ObservableObject {
     
     @Published var playListEpodsed = [EpoisdesModel]()
     
-     func  handlePreviousEpoisde(){
+    func  handlePreviousEpoisde(){
         if playListEpodsed.count == 0  {
             return
         }
@@ -96,7 +96,7 @@ class MainViewModel: ObservableObject {
         self.selectedPodacst = previousEpoisde
     }
     
-     func  handleNextEpoisde(){
+    func  handleNextEpoisde(){
         if playListEpodsed.count == 0  {
             return
         }
@@ -152,9 +152,9 @@ class MainViewModel: ObservableObject {
     
     func handleDownloadComplete(userInfo: [String:Any]?){
         guard let userInfo = userInfo else { return  }
-       guard let title = userInfo["title"] as? String else { return  }
-       guard let fileUrl = userInfo["fileUrl"] as? URL else { return  }
-       
+        guard let title = userInfo["title"] as? String else { return  }
+        guard let fileUrl = userInfo["fileUrl"] as? URL else { return  }
+        
         var downloadeEpoisde = UserDefaults.standard.downloadedEpoisde()
         if let index = downloadeEpoisde.firstIndex(where: {$0.title == title}) {
             
@@ -168,7 +168,7 @@ class MainViewModel: ObservableObject {
                 print("can not encode with file url ",err)
             }
         }
-       
+        
     }
     
     
@@ -203,47 +203,61 @@ class MainViewModel: ObservableObject {
     }
     
     func removeDownloads(msg:EpoisdesModel)  {
-//        let v = PodcastModel(artistName: msg.artistName, trackName: msg.trackName, artworkUrl600: msg.artworkUrl600, trackCount: msg.trackCount, feedUrl: msg.feedUrl)
-//        //
-//        self.favoriteOrUnFavoritePodcast(pod:v )
-//        secondfavoritePodcasts.removeAll(where: {$0.feedUrl==v.feedUrl})
+        //        let v = PodcastModel(artistName: msg.artistName, trackName: msg.trackName, artworkUrl600: msg.artworkUrl600, trackCount: msg.trackCount, feedUrl: msg.feedUrl)
+        //        //
+        //        self.favoriteOrUnFavoritePodcast(pod:v )
+        //        secondfavoritePodcasts.removeAll(where: {$0.feedUrl==v.feedUrl})
     }
     
     func downloadOrUnDownloadPodcast(pod:EpoisdesModel)  {
-        let ss = UserDefaults.standard.downloadedEpoisde()
+        var ss = UserDefaults.standard.downloadedEpoisde()
         
         if !hasDownload(pod: pod) {
             
+            do {
+                let data =   try NSKeyedArchiver.archivedData(withRootObject: ss, requiringSecureCoding: false)
+                UserDefaults.standard.set(data, forKey: UserDefaults.downloadEpoisdeKey)
+                
+            } catch let err {
+                print("error" + err.localizedDescription)
+                //                createAlert(title: "Error", message: err.localizedDescription)
+            }
+            
         }else {
             UserDefaults.standard.deleteEpoisde(epoi: pod)
-            
+            ss.append(pod)
             self.checkDownloadChanged=true
         }
-//        var listOfPodcast = UserDefaults.standard.savePodcasts()
-//
-//        if !hasFavorite(pod: pod) {
-//            listOfPodcast.append(pod)
-//            self.isFavorite = true
-//            do {
-//                let data =   try NSKeyedArchiver.archivedData(withRootObject: listOfPodcast, requiringSecureCoding: false)
-//                UserDefaults.standard.set(data, forKey: UserDefaults.ketTrack)
-//
-//            } catch let err {
-//                print("error" + err.localizedDescription)
-//                //                createAlert(title: "Error", message: err.localizedDescription)
-//            }
-//        }else {
-//            UserDefaults.standard.deletePodcast(pod: pod)
-//            self.isFavorite = false
-//            self.secondfavoritePodcasts.removeAll(where: {pod.feedUrl==$0.feedUrl})
-//            self.pinnedViews.removeAll(where: {pod.feedUrl==$0.feedUrl})
-//            self.checkBookmarkChanged=true
-//
-//        }
-//        DispatchQueue.main.async {
-//            self.showToast.toggle()
-//
-//        }
+        
+        DispatchQueue.main.async {
+            self.showToast.toggle()
+            
+        }
+        //        var listOfPodcast = UserDefaults.standard.savePodcasts()
+        //
+        //        if !hasFavorite(pod: pod) {
+        //            listOfPodcast.append(pod)
+        //            self.isFavorite = true
+        //            do {
+        //                let data =   try NSKeyedArchiver.archivedData(withRootObject: listOfPodcast, requiringSecureCoding: false)
+        //                UserDefaults.standard.set(data, forKey: UserDefaults.ketTrack)
+        //
+        //            } catch let err {
+        //                print("error" + err.localizedDescription)
+        //                //                createAlert(title: "Error", message: err.localizedDescription)
+        //            }
+        //        }else {
+        //            UserDefaults.standard.deletePodcast(pod: pod)
+        //            self.isFavorite = false
+        //            self.secondfavoritePodcasts.removeAll(where: {pod.feedUrl==$0.feedUrl})
+        //            self.pinnedViews.removeAll(where: {pod.feedUrl==$0.feedUrl})
+        //            self.checkBookmarkChanged=true
+        //
+        //        }
+        //        DispatchQueue.main.async {
+        //            self.showToast.toggle()
+        //
+        //        }
     }
     
     func removeFavorites(msg:SecondPodcastModel)  {
@@ -262,7 +276,7 @@ class MainViewModel: ObservableObject {
             do {
                 let data =   try NSKeyedArchiver.archivedData(withRootObject: listOfPodcast, requiringSecureCoding: false)
                 UserDefaults.standard.set(data, forKey: UserDefaults.ketTrack)
-               
+                
             } catch let err {
                 print("error" + err.localizedDescription)
                 //                createAlert(title: "Error", message: err.localizedDescription)
@@ -465,17 +479,17 @@ class MainViewModel: ObservableObject {
         command.playCommand.isEnabled = true
         command.playCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
             self.avPlayer.play()
-//            self.playPauseButton.setImage(#imageLiteral(resourceName: "play-button-1"), for: .normal)
-//            self.miniEpoisdePauseButton.setImage(#imageLiteral(resourceName: "play-button-1"), for: .normal)
+            //            self.playPauseButton.setImage(#imageLiteral(resourceName: "play-button-1"), for: .normal)
+            //            self.miniEpoisdePauseButton.setImage(#imageLiteral(resourceName: "play-button-1"), for: .normal)
             self.elipshedTime(playbackRate: 1)
-           
+            
             return .success
         }
         command.pauseCommand.isEnabled = true
         command.pauseCommand.addTarget { (_) -> MPRemoteCommandHandlerStatus in
             self.avPlayer.pause()
-//            self.playPauseButton.setImage(#imageLiteral(resourceName: "pause-button"), for: .normal)
-//            self.miniEpoisdePauseButton.setImage(#imageLiteral(resourceName: "pause-button"), for: .normal)
+            //            self.playPauseButton.setImage(#imageLiteral(resourceName: "pause-button"), for: .normal)
+            //            self.miniEpoisdePauseButton.setImage(#imageLiteral(resourceName: "pause-button"), for: .normal)
             
             self.elipshedTime(playbackRate: 0)
             return .success
@@ -486,36 +500,36 @@ class MainViewModel: ObservableObject {
             self.handlPlaying()
             return .success
         }
-//        command.nextTrackCommand.addTarget(self, action: #selector(handleNextEpoisdes))
-//        command.previousTrackCommand.addTarget(self, action: #selector(handlePreviousEpoisdes))
+        //        command.nextTrackCommand.addTarget(self, action: #selector(handleNextEpoisdes))
+        //        command.previousTrackCommand.addTarget(self, action: #selector(handlePreviousEpoisdes))
     }
     
     func elipshedTime(playbackRate: Float)  {
         let elipshedTime = CMTimeGetSeconds(avPlayer.currentTime())
         
-         MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = elipshedTime
-         MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPNowPlayingInfoPropertyPlaybackRate] = playbackRate
+        MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = elipshedTime
+        MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPNowPlayingInfoPropertyPlaybackRate] = playbackRate
     }
     
     @objc func handleNextEpoisdes(){
-
+        
         if playListEpodsed.count == 0 {
             return
         }
         let currenIndex = playListEpodsed.firstIndex {(ep) -> Bool in
             return self.selectedPodacst.title == ep.title &&
-            self.selectedPodacst.author == ep.author
+                self.selectedPodacst.author == ep.author
         }
-
+        
         guard let index = currenIndex else { return  }
-
+        
         let nextEpoisde:EpoisdesModel
         if index == playListEpodsed.count - 1 {
             nextEpoisde = playListEpodsed[0]
         }else {
             nextEpoisde = playListEpodsed[index + 1]
         }
-
+        
         self.selectedPodacst = nextEpoisde
     }
     
