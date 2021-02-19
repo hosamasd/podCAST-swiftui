@@ -42,6 +42,7 @@ class MainViewModel: ObservableObject {
     @Published var haveChaned = false
     @Published var doneChaned = false
     @Published var checkBookmarkChanged=false
+    @Published var checkDownloadChanged=false
     @Published var selectedPodacst = EpoisdesModel(title: "", pubDate: Date(), description: "", author: "", streamUrl: "") {
         didSet{
             playEpoisde()
@@ -150,7 +151,7 @@ class MainViewModel: ObservableObject {
     }
     
     func handleDownloadComplete(userInfo: [String:Any]?){
-        guard let userInfo = userInfo as? [String:Any] else { return  }
+        guard let userInfo = userInfo else { return  }
        guard let title = userInfo["title"] as? String else { return  }
        guard let fileUrl = userInfo["fileUrl"] as? URL else { return  }
        
@@ -196,16 +197,60 @@ class MainViewModel: ObservableObject {
         return  listOfPodcast.contains(where: {pod.feedUrl==$0.feedUrl})
     }
     
+    func hasDownload(pod:EpoisdesModel) -> Bool {
+        let ss = UserDefaults.standard.downloadedEpoisde()
+        return  ss.contains(where: {pod.fileUrl==$0.fileUrl})
+    }
+    
+    func removeDownloads(msg:EpoisdesModel)  {
+//        let v = PodcastModel(artistName: msg.artistName, trackName: msg.trackName, artworkUrl600: msg.artworkUrl600, trackCount: msg.trackCount, feedUrl: msg.feedUrl)
+//        //
+//        self.favoriteOrUnFavoritePodcast(pod:v )
+//        secondfavoritePodcasts.removeAll(where: {$0.feedUrl==v.feedUrl})
+    }
+    
+    func downloadOrUnDownloadPodcast(pod:EpoisdesModel)  {
+        let ss = UserDefaults.standard.downloadedEpoisde()
+        
+        if !hasDownload(pod: pod) {
+            
+        }else {
+            UserDefaults.standard.deleteEpoisde(epoi: pod)
+            
+            self.checkDownloadChanged=true
+        }
+//        var listOfPodcast = UserDefaults.standard.savePodcasts()
+//
+//        if !hasFavorite(pod: pod) {
+//            listOfPodcast.append(pod)
+//            self.isFavorite = true
+//            do {
+//                let data =   try NSKeyedArchiver.archivedData(withRootObject: listOfPodcast, requiringSecureCoding: false)
+//                UserDefaults.standard.set(data, forKey: UserDefaults.ketTrack)
+//
+//            } catch let err {
+//                print("error" + err.localizedDescription)
+//                //                createAlert(title: "Error", message: err.localizedDescription)
+//            }
+//        }else {
+//            UserDefaults.standard.deletePodcast(pod: pod)
+//            self.isFavorite = false
+//            self.secondfavoritePodcasts.removeAll(where: {pod.feedUrl==$0.feedUrl})
+//            self.pinnedViews.removeAll(where: {pod.feedUrl==$0.feedUrl})
+//            self.checkBookmarkChanged=true
+//
+//        }
+//        DispatchQueue.main.async {
+//            self.showToast.toggle()
+//
+//        }
+    }
+    
     func removeFavorites(msg:SecondPodcastModel)  {
         let v = PodcastModel(artistName: msg.artistName, trackName: msg.trackName, artworkUrl600: msg.artworkUrl600, trackCount: msg.trackCount, feedUrl: msg.feedUrl)
         //
         self.favoriteOrUnFavoritePodcast(pod:v )
         secondfavoritePodcasts.removeAll(where: {$0.feedUrl==v.feedUrl})
-        //        secondfavoritePodcasts.removeAll { (msg1) -> Bool in
-        //
-        //            if msg.feedUrl == msg1.feedUrl{return true}
-        //            else{return false}
-        //        }
     }
     
     func favoriteOrUnFavoritePodcast(pod:PodcastModel)  {
@@ -378,7 +423,7 @@ class MainViewModel: ObservableObject {
         
         if value.location.x >= 0 && value.location.x <= UIScreen.main.bounds.width - 32{
             
-            var ss = UIScreen.main.bounds.width - 32
+            let ss = UIScreen.main.bounds.width - 32
             ////
             let ttt = value.location.x
             let p = ttt/ss
@@ -386,7 +431,7 @@ class MainViewModel: ObservableObject {
             let g = p*100
             let w = (g*epopFloatTotalTimeValue) / 100
             
-            let sss = w*100
+            _ = w*100
             
             
             let fifteenSecond = CMTimeMake(value: Int64(w), timescale: 1)
@@ -441,8 +486,8 @@ class MainViewModel: ObservableObject {
             self.handlPlaying()
             return .success
         }
-        command.nextTrackCommand.addTarget(self, action: #selector(handleNextEpoisdes))
-        command.previousTrackCommand.addTarget(self, action: #selector(handlePreviousEpoisdes))
+//        command.nextTrackCommand.addTarget(self, action: #selector(handleNextEpoisdes))
+//        command.previousTrackCommand.addTarget(self, action: #selector(handlePreviousEpoisdes))
     }
     
     func elipshedTime(playbackRate: Float)  {
@@ -457,9 +502,9 @@ class MainViewModel: ObservableObject {
         if playListEpodsed.count == 0 {
             return
         }
-        let currenIndex = playListEpodsed.index {(ep) -> Bool in
-            return self.epoisde.title == ep.title &&
-            self.epoisde.author == ep.author
+        let currenIndex = playListEpodsed.firstIndex {(ep) -> Bool in
+            return self.selectedPodacst.title == ep.title &&
+            self.selectedPodacst.author == ep.author
         }
 
         guard let index = currenIndex else { return  }

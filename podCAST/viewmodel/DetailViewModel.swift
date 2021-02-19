@@ -24,7 +24,7 @@ class DetailViewModel: ObservableObject {
         
         APIServices.shared.fetchEpoisdes(feedUrl:   "http://www.we-are-a.com/Site/A_Marbin/rss.xml".toSecrueHttps()) { (pods,err) in
             
-            if let err=err {
+            if err != nil {
                 DispatchQueue.main.async {
                 self.notFoundData=true
                 self.isLoading=false
@@ -50,7 +50,7 @@ class DetailViewModel: ObservableObject {
 
         APIServices.shared.fetchEpoisdes(feedUrl: podcast.feedUrl ?? "") { (pods,err) in
 
-            if let err=err {
+            if err != nil {
                 DispatchQueue.main.async {
                 self.notFoundData=true
                 self.isLoading=false
